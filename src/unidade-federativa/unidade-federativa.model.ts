@@ -13,6 +13,7 @@ UnidadeFederativa.init(
         sigla: { type: Sequelize.STRING }
     },
     {
+        tableName: 'unidade_federativa',
         sequelize: database.connection,
         freezeTableName: true
     }

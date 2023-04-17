@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 
 import routes from './routes';
 import database from './database/database';
+import UnidadeFederativa from './unidade-federativa/unidade-federativa.model';
 
 class Application {
     server: http.Server;
@@ -17,6 +18,7 @@ class Application {
 
         this._setMiddlewares();
         this._setRoutes();
+        this._syncDatabase();
     }
 
     private _setMiddlewares(): void {
@@ -31,6 +33,9 @@ class Application {
         this.express.use(routes);
     }
 
+    private _syncDatabase():void{
+        UnidadeFederativa.sync({alter:true});
+    }
 }
 
 export default new Application().server;
