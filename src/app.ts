@@ -17,9 +17,6 @@ class Application {
 
         this._setMiddlewares();
         this._setRoutes();
-
-        console.log(database);
-        
     }
 
     private _setMiddlewares(): void {
