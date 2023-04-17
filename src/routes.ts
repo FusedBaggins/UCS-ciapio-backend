@@ -3,7 +3,7 @@ import unidadeFederativaControler from "./unidade-federativa/unidade-federativa.
 
 
 const routes = Router();
-routes.get('unidade-federativa/', unidadeFederativaControler.list);
-routes.get('unidade-federativa/id', unidadeFederativaControler.detail);
+routes.get('/unidade-federativa/', unidadeFederativaControler.list);
+routes.get('/unidade-federativa/id', unidadeFederativaControler.detail);
 
 export default routes;
