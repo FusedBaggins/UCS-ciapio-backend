@@ -5,14 +5,15 @@ import express from "express";
 import bodyParser from 'body-parser';
 
 import routes from './routes';
+import Vara from './entidades/vara/vara.model';
 import Droga from './entidades/droga/droga.model';
 import Cidade from './entidades/cidade/cidade.model';
+import Usuario from './entidades/usuario/usuario.model';
+import Pergunta from './entidades/pergunta/pergunta.model';
 import Endereco from './entidades/endereco/endereco.model';
-import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
 import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Instituicao from './entidades/instituicao/instituicao.model';
-import Usuario from './entidades/usuario/usuario.model';
-import Vara from './entidades/vara/vara.model';
+import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
 
 class Application {
     server: http.Server;
@@ -48,6 +49,7 @@ class Application {
         Instituicao.sync({ alter: true });
         Usuario.sync({ alter: true });
         Vara.sync({ alter: true });
+        Pergunta.sync({ alter: true });
     }
 }
 
