@@ -12,6 +12,7 @@ import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa
 import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Instituicao from './entidades/instituicao/instituicao.model';
 import Usuario from './entidades/usuario/usuario.model';
+import Vara from './entidades/vara/vara.model';
 
 class Application {
     server: http.Server;
@@ -46,6 +47,7 @@ class Application {
         Deficiencia.sync({ alter: true });
         Instituicao.sync({ alter: true });
         Usuario.sync({ alter: true });
+        Vara.sync({ alter: true });
     }
 }
 

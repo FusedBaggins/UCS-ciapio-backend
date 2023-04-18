@@ -1,10 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 
 import bcrypt from 'bcryptjs';
-
 import database from '../../database/database';
-import Instituicao from '../instituicao/instituicao.model';
-
 
 class Usuario extends Model {
     id!: number;
