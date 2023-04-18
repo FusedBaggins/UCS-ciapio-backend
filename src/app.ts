@@ -9,6 +9,7 @@ import Droga from './entidades/droga/droga.model';
 import Cidade from './entidades/cidade/cidade.model';
 import Endereco from './entidades/endereco/endereco.model';
 import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
+import Deficiencia from './entidades/deficiencia/deficiencia.model';
 
 class Application {
     server: http.Server;
@@ -40,6 +41,7 @@ class Application {
         Cidade.sync({ alter: true });
         Endereco.sync({ alter: true });
         Droga.sync({ alter: true });
+        Deficiencia.sync({ alter: true });
     }
 }
 
