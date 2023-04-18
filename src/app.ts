@@ -5,9 +5,9 @@ import express from "express";
 import bodyParser from 'body-parser';
 
 import routes from './routes';
-import Cidade from './cidade/cidade.model';
-import Droga from './droga/droga.model';
-import UnidadeFederativa from './unidade-federativa/unidade-federativa.model';
+import Cidade from './entidades/cidade/cidade.model';
+import Droga from './entidades/droga/droga.model';
+import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
 
 class Application {
     server: http.Server;

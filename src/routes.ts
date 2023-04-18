@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import cidadeControler from "./cidade/cidade.controller";
-import unidadeFederativaController from './unidade-federativa/unidade-federativa.controller';
+import cidadeControler from "./entidades/cidade/cidade.controller";
+import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
 
 const routes = Router();
 routes.get('/unidade-federativa/', unidadeFederativaController.list);

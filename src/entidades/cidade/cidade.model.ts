@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-import database from '../database/database';
+import database from '../../database/database';
 import UnidadeFederativa from '../unidade-federativa/unidade-federativa.model';
 
 class Cidade extends Model {
