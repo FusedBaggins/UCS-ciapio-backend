@@ -5,8 +5,9 @@ import express from "express";
 import bodyParser from 'body-parser';
 
 import routes from './routes';
-import Cidade from './entidades/cidade/cidade.model';
 import Droga from './entidades/droga/droga.model';
+import Cidade from './entidades/cidade/cidade.model';
+import Endereco from './entidades/endereco/endereco.model';
 import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
 
 class Application {
@@ -37,6 +38,7 @@ class Application {
     private _syncDatabase(): void {
         UnidadeFederativa.sync({ alter: true });
         Cidade.sync({ alter: true });
+        Endereco.sync({ alter: true });
         Droga.sync({ alter: true });
     }
 }
