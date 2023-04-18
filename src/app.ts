@@ -11,6 +11,7 @@ import Endereco from './entidades/endereco/endereco.model';
 import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
 import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Instituicao from './entidades/instituicao/instituicao.model';
+import Usuario from './entidades/usuario/usuario.model';
 
 class Application {
     server: http.Server;
@@ -44,6 +45,7 @@ class Application {
         Droga.sync({ alter: true });
         Deficiencia.sync({ alter: true });
         Instituicao.sync({ alter: true });
+        Usuario.sync({ alter: true });
     }
 }
 

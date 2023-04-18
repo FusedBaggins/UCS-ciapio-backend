@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import cidadeControler from "./entidades/cidade/cidade.controller";
+import usuarioController from "./entidades/usuario/usuario.controller";
 import enderecoController from "./entidades/endereco/endereco.controller";
 import instituicaoController from "./entidades/instituicao/instituicao.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
@@ -14,5 +15,7 @@ routes.get('/endereco/', enderecoController.list);
 routes.get('/endereco/:id', enderecoController.detail);
 routes.get('/instituicao/', instituicaoController.list);
 routes.get('/instituicao/:id', instituicaoController.detail);
+routes.get('/usuario/', usuarioController.list);
+routes.get('/usuario/:id', usuarioController.detail);
 
 export default routes;

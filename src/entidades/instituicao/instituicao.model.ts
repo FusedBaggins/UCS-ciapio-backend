@@ -2,6 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 
 import database from '../../database/database';
 import Endereco from '../endereco/endereco.model';
+import Usuario from '../usuario/usuario.model';
 
 
 class Instituicao extends Model {
@@ -36,5 +37,10 @@ Instituicao.init(
         tableName: 'instituicao',
     }
 );
+
+Usuario.belongsTo(Instituicao, {
+    foreignKey:'instituicaoId',
+    as: 'instituicao'
+});
 
 export default Instituicao;
