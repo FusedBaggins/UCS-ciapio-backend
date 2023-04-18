@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 
 import routes from './routes';
 import Cidade from './cidade/cidade.model';
+import Droga from './droga/droga.model';
 import UnidadeFederativa from './unidade-federativa/unidade-federativa.model';
 
 class Application {
@@ -36,6 +37,7 @@ class Application {
     private _syncDatabase(): void {
         UnidadeFederativa.sync({ alter: true });
         Cidade.sync({ alter: true });
+        Droga.sync({ alter: true });
     }
 }
 
