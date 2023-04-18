@@ -5,7 +5,7 @@ import express from "express";
 import bodyParser from 'body-parser';
 
 import routes from './routes';
-import database from './database/database';
+import Cidade from './cidade/cidade.model';
 import UnidadeFederativa from './unidade-federativa/unidade-federativa.model';
 
 class Application {
@@ -33,8 +33,9 @@ class Application {
         this.express.use(routes);
     }
 
-    private _syncDatabase():void{
-        UnidadeFederativa.sync({alter:true});
+    private _syncDatabase(): void {
+        UnidadeFederativa.sync({ alter: true });
+        Cidade.sync({ alter: true });
     }
 }
 

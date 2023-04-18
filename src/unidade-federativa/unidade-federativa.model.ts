@@ -1,5 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import database from '../database/database';
+import Cidade from '../cidade/cidade.model';
+
 
 class UnidadeFederativa extends Model {
     id!: number;
@@ -13,10 +15,15 @@ UnidadeFederativa.init(
         sigla: { type: Sequelize.STRING }
     },
     {
-        tableName: 'unidade_federativa',
         sequelize: database.connection,
-        freezeTableName: true
+        freezeTableName: true,
+        tableName: 'unidade_federativa',
     }
 );
+
+Cidade.belongsTo(UnidadeFederativa, {
+    foreignKey:'unidadeFederativaId',
+    as: 'unidadeFederativa'
+});
 
 export default UnidadeFederativa;
