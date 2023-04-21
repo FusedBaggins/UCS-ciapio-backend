@@ -5,6 +5,7 @@ import cidadeControler from "./entidades/cidade/cidade.controller";
 import usuarioController from "./entidades/usuario/usuario.controller";
 import enderecoController from "./entidades/endereco/endereco.controller";
 import perguntaController from "./entidades/pergunta/pergunta.controller";
+import processoController from "./entidades/processo/processo.controller";
 import instituicaoController from "./entidades/instituicao/instituicao.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
 
@@ -24,5 +25,7 @@ routes.get('/vara/', varaController.list);
 routes.get('/vara/:id', varaController.detail);
 routes.get('/pergunta/', perguntaController.list);
 routes.get('/pergunta/:id', perguntaController.detail);
+routes.get('/pergunta/', processoController.list);
+routes.get('/pergunta/:id', processoController.detail);
 
 export default routes;

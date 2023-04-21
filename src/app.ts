@@ -14,6 +14,7 @@ import Endereco from './entidades/endereco/endereco.model';
 import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Instituicao from './entidades/instituicao/instituicao.model';
 import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
+import Processo from './entidades/processo/processo.model';
 
 class Application {
     server: http.Server;
@@ -50,6 +51,7 @@ class Application {
         Usuario.sync({ alter: true });
         Vara.sync({ alter: true });
         Pergunta.sync({ alter: true });
+        Processo.sync({ alter: true });
     }
 }
 

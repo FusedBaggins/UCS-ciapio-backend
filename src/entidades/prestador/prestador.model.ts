@@ -5,6 +5,7 @@ import Escolaridade from "../../enums/escolaridade";
 import EstadoCivil from "../../enums/estado-civil";
 import Endereco from "../endereco/endereco.model";
 import Usuario from "../usuario/usuario.model";
+import Processo from '../processo/processo.model';
 
 
 export class Prestador extends Model {
@@ -73,4 +74,10 @@ Prestador.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });
+
+Processo.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
 export default Prestador;

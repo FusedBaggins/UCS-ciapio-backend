@@ -1,5 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 import database from "../../database/database";
+import Processo from '../processo/processo.model';
 
 
 export class Vara extends Model {
@@ -17,5 +18,10 @@ Vara.init(
         tableName: 'vara'
     }
 );
+
+Processo.belongsTo(Vara, {
+    foreignKey: 'varaId',
+    as: 'vara'
+});
 
 export default Vara;
