@@ -1,9 +1,10 @@
 
-import Sequelize, { DataTypes, Model } from 'sequelize';
-import Prestador from "../prestador/prestador.model";
-import Instituicao from "../instituicao/instituicao.model";
+import Sequelize, { Model } from 'sequelize';
+
 import Vara from "../vara/vara.model";
 import database from "../../database/database";
+import Prestador from "../prestador/prestador.model";
+import Instituicao from "../instituicao/instituicao.model";
 
 export class Processo extends Model {
     id!: number;

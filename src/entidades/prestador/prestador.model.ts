@@ -53,7 +53,7 @@ Prestador.init(
             },
             allowNull: false,
         },
-        renda_familiar: { type: Sequelize.NUMBER, allowNull: false },
+        renda_familiar: { type: Sequelize.FLOAT, allowNull: false },
         telefone1: { type: Sequelize.STRING, allowNull: false },
         telefone2: { type: Sequelize.STRING, allowNull: true },
         religiao: { type: Sequelize.STRING, allowNull: false },

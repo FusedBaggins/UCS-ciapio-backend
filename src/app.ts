@@ -11,10 +11,12 @@ import Cidade from './entidades/cidade/cidade.model';
 import Usuario from './entidades/usuario/usuario.model';
 import Pergunta from './entidades/pergunta/pergunta.model';
 import Endereco from './entidades/endereco/endereco.model';
+import Processo from './entidades/processo/processo.model';
+import Resposta from './entidades/resposta/resposta.model';
+import Prestador from './entidades/prestador/prestador.model';
 import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Instituicao from './entidades/instituicao/instituicao.model';
 import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
-import Processo from './entidades/processo/processo.model';
 
 class Application {
     server: http.Server;
@@ -50,8 +52,10 @@ class Application {
         Instituicao.sync({ alter: true });
         Usuario.sync({ alter: true });
         Vara.sync({ alter: true });
-        Pergunta.sync({ alter: true });
         Processo.sync({ alter: true });
+        Prestador.sync({ alter: true });
+        Pergunta.sync({ alter: true });
+        Resposta.sync({ alter: true });
     }
 }
 
