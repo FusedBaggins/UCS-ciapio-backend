@@ -6,6 +6,7 @@ import EstadoCivil from "../../enums/estado-civil";
 import Endereco from "../endereco/endereco.model";
 import Usuario from "../usuario/usuario.model";
 import Processo from '../processo/processo.model';
+import { FichaMedica } from '../ficha-medica/ficha-medica.model';
 
 
 export class Prestador extends Model {
@@ -70,12 +71,12 @@ Prestador.init(
     }
 );
 
-Prestador.belongsTo(Prestador, {
+Processo.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });
 
-Processo.belongsTo(Prestador, {
+FichaMedica.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });

@@ -17,6 +17,7 @@ import Prestador from './entidades/prestador/prestador.model';
 import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Instituicao from './entidades/instituicao/instituicao.model';
 import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
+import { FichaMedica } from './entidades/ficha-medica/ficha-medica.model';
 
 class Application {
     server: http.Server;
@@ -47,13 +48,16 @@ class Application {
         UnidadeFederativa.sync({ alter: true });
         Cidade.sync({ alter: true });
         Endereco.sync({ alter: true });
-        Droga.sync({ alter: true });
-        Deficiencia.sync({ alter: true });
-        Instituicao.sync({ alter: true });
         Usuario.sync({ alter: true });
+        Instituicao.sync({ alter: true });
+        
         Vara.sync({ alter: true });
         Processo.sync({ alter: true });
+        
         Prestador.sync({ alter: true });
+        FichaMedica.sync({ alter: true });
+        Droga.sync({ alter: true });
+        Deficiencia.sync({ alter: true });
         Pergunta.sync({ alter: true });
         Resposta.sync({ alter: true });
     }
