@@ -25,24 +25,6 @@ PerfilPermissaoUsuario.init(
     {
         sequelize: database.connection,
         freezeTableName: true,
-        tableName: 'perfil_permissao',
-    }
-);
-
-PerfilPermissaoUsuario.init(
-    {
-        nome: { type: Sequelize.STRING, allowNull: false },
-        perfil: {
-            type: DataTypes.INTEGER,
-            validate: {
-                isIn: [[...Object.values(Perfil)]],
-            },
-            allowNull: false,
-        },
-    },
-    {
-        sequelize: database.connection,
-        freezeTableName: true,
         tableName: 'perfil_permissao_usuario',
     }
 );

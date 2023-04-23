@@ -38,9 +38,9 @@ Usuario.addHook('beforeSave', async (usuario: Usuario): Promise<void> => {
 });
 
 
-PerfilPermissaoUsuario.belongsTo(Usuario, {
+Usuario.hasMany(PerfilPermissaoUsuario, {
     foreignKey:'usuarioId',
-    as: 'usuario'
+    as: 'perfisPermissao'
 });
 
 export default Usuario;
