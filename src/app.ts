@@ -26,6 +26,7 @@ import Droga from './entidades/droga/droga.model';
 import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Pergunta from './entidades/pergunta/pergunta.model';
 import Resposta from './entidades/resposta/resposta.model';
+import AtestadoComparecimento from './entidades/atestado-comparecimento/atestado-comparecimento.model';
 
 class Application {
     server: http.Server;
@@ -92,6 +93,7 @@ class Application {
         Resposta.sync({ alter: true });
         AgendamentoPrestacao.sync({ alter: true });
         Visita.sync({ alter: true });
+        AtestadoComparecimento.sync({ alter: true });
         database.sync();
     }
 }

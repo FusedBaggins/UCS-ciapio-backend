@@ -7,6 +7,7 @@ import Prestador from "../prestador/prestador.model";
 import Instituicao from "../instituicao/instituicao.model";
 import AgendamentoPrestacao from '../agendamento-prestacao/agendamento-prestacao.model';
 import Visita from '../visita/visita.model';
+import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
 
 export class Processo extends Model {
     id!: number;
@@ -55,6 +56,11 @@ Processo.hasOne(AgendamentoPrestacao, {
 
 Processo.hasMany(Visita, {
     foreignKey: 'processoId',
+    as: 'processo'
+});
+
+Processo.hasMany(AtestadoComparecimento, {
+    foreignKey:'processoId',
     as: 'processo'
 });
 

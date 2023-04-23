@@ -20,6 +20,9 @@ import UnidadeFederativa from '../entidades/unidade-federativa/unidade-federativ
 import PerfilPermissaoUsuario from '../entidades/perfil-permissao-usuario/perfil-permissao-usuario.model';
 import Beneficio from '../entidades/beneficio/beneficio.model';
 import Curso from '../entidades/curso/curso.model';
+import AtestadoComparecimento from '../entidades/atestado-comparecimento/atestado-comparecimento.model';
+import Visita from '../entidades/visita/visita.model';
+import AgendamentoPrestacao from '../entidades/agendamento-prestacao/agendamento-prestacao.model';
 
 class Database {
     connection!: Sequelize.Sequelize;
@@ -51,6 +54,9 @@ class Database {
         Curso.sync({ alter: true });
         Pergunta.sync({ alter: true });
         Resposta.sync({ alter: true });
+        AtestadoComparecimento.sync({ alter: true });
+        Visita.sync({ alter: true });
+        AgendamentoPrestacao.sync({ alter: true });
     }
 }
 

@@ -4,6 +4,7 @@ import database from '../../database/database';
 import Endereco from '../endereco/endereco.model';
 import Usuario from '../usuario/usuario.model';
 import Visita from '../visita/visita.model';
+import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
 
 
 class Instituicao extends Model {
@@ -45,6 +46,11 @@ Usuario.belongsTo(Instituicao, {
 });
 
 Instituicao.hasOne(Visita, {
+    foreignKey:'instituicaoId',
+    as: 'instituicao'
+});
+
+Instituicao.hasMany(AtestadoComparecimento, {
     foreignKey:'instituicaoId',
     as: 'instituicao'
 });

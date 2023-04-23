@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import database from '../../database/database';
 import PerfilPermissaoUsuario from '../perfil-permissao-usuario/perfil-permissao-usuario.model';
 import AgendamentoPrestacao from '../agendamento-prestacao/agendamento-prestacao.model';
+import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
 
 class Usuario extends Model {
     id!: number;
@@ -47,6 +48,11 @@ Usuario.hasMany(PerfilPermissaoUsuario, {
 Usuario.hasMany(AgendamentoPrestacao, {
     foreignKey:'usuarioId',
     as: 'usuario'
+});
+
+Usuario.hasMany(AtestadoComparecimento, {
+    foreignKey:'usuarioAtendimentoId',
+    as: 'usuarioAtendimento'
 });
 
 export default Usuario;
