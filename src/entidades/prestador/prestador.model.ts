@@ -2,6 +2,7 @@ import Sequelize, { DataTypes, Model } from 'sequelize';
 
 import Etnia from "../../enums/etnia";
 import Curso from '../curso/curso.model';
+import Visita from '../visita/visita.model';
 import database from "../../database/database";
 import Usuario from "../usuario/usuario.model";
 import Endereco from "../endereco/endereco.model";
@@ -85,6 +86,11 @@ Processo.belongsTo(Prestador, {
 
 FichaMedica.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
+Prestador.hasMany(Visita, {
+    foreignKey:'prestadorId',
     as: 'prestador'
 });
 

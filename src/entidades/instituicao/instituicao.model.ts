@@ -3,6 +3,7 @@ import Sequelize, { Model } from 'sequelize';
 import database from '../../database/database';
 import Endereco from '../endereco/endereco.model';
 import Usuario from '../usuario/usuario.model';
+import Visita from '../visita/visita.model';
 
 
 class Instituicao extends Model {
@@ -39,6 +40,11 @@ Instituicao.init(
 );
 
 Usuario.belongsTo(Instituicao, {
+    foreignKey:'instituicaoId',
+    as: 'instituicao'
+});
+
+Instituicao.hasOne(Visita, {
     foreignKey:'instituicaoId',
     as: 'instituicao'
 });

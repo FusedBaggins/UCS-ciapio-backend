@@ -3,6 +3,7 @@ import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 import database from '../../database/database';
 import PerfilPermissaoUsuario from '../perfil-permissao-usuario/perfil-permissao-usuario.model';
+import AgendamentoPrestacao from '../agendamento-prestacao/agendamento-prestacao.model';
 
 class Usuario extends Model {
     id!: number;
@@ -41,6 +42,11 @@ Usuario.addHook('beforeSave', async (usuario: Usuario): Promise<void> => {
 Usuario.hasMany(PerfilPermissaoUsuario, {
     foreignKey:'usuarioId',
     as: 'perfisPermissao'
+});
+
+Usuario.hasMany(AgendamentoPrestacao, {
+    foreignKey:'usuarioId',
+    as: 'usuario'
 });
 
 export default Usuario;

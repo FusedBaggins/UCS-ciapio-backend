@@ -5,6 +5,8 @@ import Vara from "../vara/vara.model";
 import database from "../../database/database";
 import Prestador from "../prestador/prestador.model";
 import Instituicao from "../instituicao/instituicao.model";
+import AgendamentoPrestacao from '../agendamento-prestacao/agendamento-prestacao.model';
+import Visita from '../visita/visita.model';
 
 export class Processo extends Model {
     id!: number;
@@ -45,5 +47,15 @@ Processo.init(
         tableName: 'processo'
     }
 );
+
+Processo.hasOne(AgendamentoPrestacao, {
+    foreignKey:'processoId',
+    as: 'processo'
+});
+
+Processo.hasMany(Visita, {
+    foreignKey: 'processoId',
+    as: 'processo'
+});
 
 export default Processo;
