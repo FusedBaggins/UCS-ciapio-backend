@@ -1,13 +1,15 @@
 import Sequelize, { DataTypes, Model } from 'sequelize';
-import database from "../../database/database";
+
 import Etnia from "../../enums/etnia";
-import Escolaridade from "../../enums/escolaridade";
-import EstadoCivil from "../../enums/estado-civil";
-import Endereco from "../endereco/endereco.model";
+import database from "../../database/database";
 import Usuario from "../usuario/usuario.model";
+import Endereco from "../endereco/endereco.model";
+import Trabalho from '../trabalho/trabalho.model';
 import Processo from '../processo/processo.model';
-import { FichaMedica } from '../ficha-medica/ficha-medica.model';
-import { Trabalho } from '../trabalho/trabalho.model';
+import EstadoCivil from "../../enums/estado-civil";
+import Escolaridade from "../../enums/escolaridade";
+import FichaMedica from '../ficha-medica/ficha-medica.model';
+import AlternativaPenal from '../alternativa-penal/alternativa-penal.model';
 
 
 export class Prestador extends Model {
@@ -83,6 +85,11 @@ FichaMedica.belongsTo(Prestador, {
 });
 
 Trabalho.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
+AlternativaPenal.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });
