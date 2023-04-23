@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 import options from './options';
 import Vara from '../entidades/vara/vara.model';
 import Droga from '../entidades/droga/droga.model';
+import Curso from '../entidades/curso/curso.model';
 import Cidade from '../entidades/cidade/cidade.model';
 import Usuario from '../entidades/usuario/usuario.model';
 import Endereco from '../entidades/endereco/endereco.model';
@@ -10,16 +11,17 @@ import Pergunta from '../entidades/pergunta/pergunta.model';
 import Processo from '../entidades/processo/processo.model';
 import Resposta from '../entidades/resposta/resposta.model';
 import Trabalho from '../entidades/trabalho/trabalho.model';
+import Familiar from '../entidades/familiar/familiar.model';
 import UsoDroga from '../entidades/uso-droga/uso-droga.model';
 import Prestador from '../entidades/prestador/prestador.model';
+import Beneficio from '../entidades/beneficio/beneficio.model';
+import Habilidade from '../entidades/habilidade/habilidade.model';
 import Deficiencia from '../entidades/deficiencia/deficiencia.model';
 import Instituicao from '../entidades/instituicao/instituicao.model';
 import FichaMedica from '../entidades/ficha-medica/ficha-medica.model';
 import AlternativaPenal from '../entidades/alternativa-penal/alternativa-penal.model';
 import UnidadeFederativa from '../entidades/unidade-federativa/unidade-federativa.model';
 import PerfilPermissaoUsuario from '../entidades/perfil-permissao-usuario/perfil-permissao-usuario.model';
-import Beneficio from '../entidades/beneficio/beneficio.model';
-import Curso from '../entidades/curso/curso.model';
 
 class Database {
     connection!: Sequelize.Sequelize;
@@ -49,6 +51,8 @@ class Database {
         AlternativaPenal.sync({ alter: true });
         Beneficio.sync({ alter: true })
         Curso.sync({ alter: true });
+        Habilidade.sync({ alter: true });
+        Familiar.sync({ alter: true });
         Pergunta.sync({ alter: true });
         Resposta.sync({ alter: true });
     }

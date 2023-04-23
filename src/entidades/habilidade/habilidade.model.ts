@@ -18,7 +18,7 @@ Habilidade.init(
     {
         sequelize: database.connection,
         freezeTableName: true,
-        tableName: 'curso'
+        tableName: 'habilidade'
     }
 );
 

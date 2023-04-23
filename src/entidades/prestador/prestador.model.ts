@@ -7,6 +7,7 @@ import Usuario from "../usuario/usuario.model";
 import Endereco from "../endereco/endereco.model";
 import Trabalho from '../trabalho/trabalho.model';
 import Processo from '../processo/processo.model';
+import Familiar from '../familiar/familiar.model';
 import EstadoCivil from "../../enums/estado-civil";
 import Escolaridade from "../../enums/escolaridade";
 import Beneficio from '../beneficio/beneficio.model';
@@ -109,6 +110,11 @@ Curso.belongsTo(Prestador, {
 
 Habilidade.belongsTo(Prestador, {
     foreignKey: 'prestaodorId',
+    as: 'prestador'
+});
+
+Familiar.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
     as: 'prestador'
 });
 
