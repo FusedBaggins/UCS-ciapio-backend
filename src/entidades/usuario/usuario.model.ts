@@ -2,6 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 
 import bcrypt from 'bcryptjs';
 import database from '../../database/database';
+import PerfilPermissaoUsuario from '../perfil-permissao-usuario/perfil-permissao-usuario.model';
 
 class Usuario extends Model {
     id!: number;
@@ -34,6 +35,12 @@ Usuario.init(
 Usuario.addHook('beforeSave', async (usuario: Usuario): Promise<void> => {
     if (usuario.senha)
         usuario.hash = await bcrypt.hash(usuario.senha, 8);
+});
+
+
+Usuario.hasMany(PerfilPermissaoUsuario, {
+    foreignKey:'usuarioId',
+    as: 'perfisPermissao'
 });
 
 export default Usuario;

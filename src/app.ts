@@ -18,7 +18,11 @@ import Deficiencia from './entidades/deficiencia/deficiencia.model';
 import Instituicao from './entidades/instituicao/instituicao.model';
 import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
 import { FichaMedica } from './entidades/ficha-medica/ficha-medica.model';
-
+import PerfilPermissaoUsuario from './entidades/perfil-permissao-usuario/perfil-permissao-usuario.model';
+import acl from 'express-acl';
+import authenticate from './middlewares/authenticate';
+import expressSession from "express-session";
+import Perfil from './enums/perfil';
 class Application {
     server: http.Server;
     express: express.Application;
@@ -27,6 +31,8 @@ class Application {
         this.express = express();
         this.server = http.createServer(this.express);
 
+        this._setSession();
+        this._setAclExpress();
         this._setMiddlewares();
         this._setRoutes();
         this._syncDatabase();
@@ -38,10 +44,29 @@ class Application {
         }));
         this.express.use(express.json());
         this.express.use(bodyParser.urlencoded({ extended: true }));
+        this.express.use(authenticate);
+        this.express.use(acl.authorize);
     }
 
     private _setRoutes(): void {
         this.express.use(routes);
+    }
+
+    private _setSession(): void{
+        this.express.use(expressSession({
+            secret: 'secretJorge',
+            resave: false,
+            saveUninitialized: false,
+        }));
+    }
+
+    private _setAclExpress(): void {
+        acl.config({
+            baseUrl: '/',
+            decodedObjectName: 'user',
+            roleSearchPath: 'session.user.role',
+            defaultRole: Perfil.UsuarioEntidade,
+        });
     }
 
     private _syncDatabase(): void {
@@ -50,11 +75,12 @@ class Application {
         Endereco.sync({ alter: true });
         Usuario.sync({ alter: true });
         Instituicao.sync({ alter: true });
-        
+
         Vara.sync({ alter: true });
         Processo.sync({ alter: true });
-        
+
         Prestador.sync({ alter: true });
+        PerfilPermissaoUsuario.sync({ alter: true });
         FichaMedica.sync({ alter: true });
         Droga.sync({ alter: true });
         Deficiencia.sync({ alter: true });
