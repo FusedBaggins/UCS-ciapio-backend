@@ -40,3 +40,5 @@ Trabalho.init(
         tableName: 'trabalho'
     }
 );
+
+export default Trabalho;

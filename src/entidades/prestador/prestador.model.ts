@@ -39,7 +39,7 @@ Prestador.init(
         estado_civil: {
             type: DataTypes.INTEGER,
             validate: {
-                isIn: [[...Object.values(Escolaridade)]],
+                isIn: [[...Object.values(EstadoCivil)]],
             },
             allowNull: false,
         },
