@@ -2,6 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 import database from '../../database/database';
 import Prestador from '../prestador/prestador.model';
 import Deficiencia from '../deficiencia/deficiencia.model';
+import UsoDroga from '../uso-droga/uso-droga.model';
 
 export class FichaMedica extends Model {
     id!: number;
@@ -19,6 +20,11 @@ FichaMedica.init(
         tableName: 'ficha_medica'
     }
 );
+
+UsoDroga.belongsTo(FichaMedica, {
+    foreignKey: 'fichaMedicaId',
+    as: 'fichaMedica'
+});
 
 Deficiencia.belongsTo(FichaMedica, {
     foreignKey: 'fichaMedicaId',

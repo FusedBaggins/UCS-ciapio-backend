@@ -1,5 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 import database from '../../database/database';
+import UsoDroga from '../uso-droga/uso-droga.model';
 
 
 class Droga extends Model {
@@ -17,5 +18,10 @@ Droga.init(
         tableName: 'droga',
     }
 );
+
+UsoDroga.belongsTo(Droga, {
+    foreignKey: 'drogaId',
+    as: 'droga'
+});
 
 export default Droga;
