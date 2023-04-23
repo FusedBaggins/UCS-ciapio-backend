@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
-import database from "../../database/database";
-import Resposta from '../resposta/resposta.model';
+
+import database from '../../../../database/database';
 
 
 export class Pergunta extends Model {

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+
 import FichaMedica from "./ficha-medica.model";
 
 export default {

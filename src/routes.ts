@@ -4,11 +4,11 @@ import varaController from "./entidades/vara/vara.controller";
 import cidadeControler from "./entidades/cidade/cidade.controller";
 import usuarioController from "./entidades/usuario/usuario.controller";
 import enderecoController from "./entidades/endereco/endereco.controller";
-import perguntaController from "./entidades/pergunta/pergunta.controller";
 import processoController from "./entidades/processo/processo.controller";
 import instituicaoController from "./entidades/instituicao/instituicao.controller";
+import perguntaController from "./entidades/prestador/entidades/pergunta/pergunta.controller";
+import respostaController from "./entidades/prestador/entidades/resposta/resposta.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
-import respostaController from "./entidades/resposta/resposta.controller";
 
 const routes = Router();
 

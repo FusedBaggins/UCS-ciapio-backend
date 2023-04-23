@@ -1,11 +1,9 @@
 import Sequelize, { Model } from 'sequelize';
 
-import database from '../../database/database';
-import UnidadeFederativa from '../unidade-federativa/unidade-federativa.model';
-import Endereco from '../endereco/endereco.model';
-import Processo from '../processo/processo.model';
-import Usuario from '../usuario/usuario.model';
 import Visita from '../visita/visita.model';
+import database from '../../database/database';
+import Usuario from '../usuario/usuario.model';
+import Processo from '../processo/processo.model';
 
 class AgendamentoPrestacao extends Model {
 

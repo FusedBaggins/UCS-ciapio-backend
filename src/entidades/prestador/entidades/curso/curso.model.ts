@@ -1,18 +1,21 @@
 import Sequelize, { Model } from 'sequelize';
 
-import database from '../../database/database';
-import Prestador from '../prestador/prestador.model';
+import Prestador from '../../prestador.model';
+import database from '../../../../database/database';
 
-export class Habilidade extends Model {
+
+export class Curso extends Model {
     id!: number;
     instituicao!: string;
+    curso!: string;
     observacao!: string;
     prestador!: Prestador;
 }
 
-Habilidade.init(
+Curso.init(
     {
-        descricao: { type: Sequelize.STRING, allowNull: false },
+        instituicao: { type: Sequelize.STRING, allowNull: false },
+        curso: { type: Sequelize.STRING, allowNull: false },
         observacao: { type: Sequelize.STRING, allowNull: true },
     },
     {
@@ -22,4 +25,4 @@ Habilidade.init(
     }
 );
 
-export default Habilidade;
+export default Curso;

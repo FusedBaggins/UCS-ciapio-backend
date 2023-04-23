@@ -1,8 +1,9 @@
 import Sequelize, { Model } from 'sequelize';
-import database from '../../database/database';
-import Prestador from '../prestador/prestador.model';
-import Deficiencia from '../deficiencia/deficiencia.model';
+
+import Prestador from '../../prestador.model';
 import UsoDroga from '../uso-droga/uso-droga.model';
+import Deficiencia from '../deficiencia/deficiencia.model';
+import database from '../../../../database/database';
 
 export class FichaMedica extends Model {
     id!: number;
