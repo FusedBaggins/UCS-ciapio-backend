@@ -2,29 +2,31 @@
 import http from 'http';
 import cors from 'cors';
 import express from "express";
+import acl from 'express-acl';
 import bodyParser from 'body-parser';
 
 import routes from './routes';
-import Vara from './entidades/vara/vara.model';
-import Droga from './entidades/droga/droga.model';
-import Cidade from './entidades/cidade/cidade.model';
-import Usuario from './entidades/usuario/usuario.model';
-import Pergunta from './entidades/pergunta/pergunta.model';
-import Endereco from './entidades/endereco/endereco.model';
-import Processo from './entidades/processo/processo.model';
-import Resposta from './entidades/resposta/resposta.model';
-import Prestador from './entidades/prestador/prestador.model';
-import Deficiencia from './entidades/deficiencia/deficiencia.model';
-import Instituicao from './entidades/instituicao/instituicao.model';
-import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
-import { FichaMedica } from './entidades/ficha-medica/ficha-medica.model';
-import PerfilPermissaoUsuario from './entidades/perfil-permissao-usuario/perfil-permissao-usuario.model';
-import acl from 'express-acl';
-import authenticate from './middlewares/authenticate';
-import expressSession from "express-session";
 import Perfil from './enums/perfil';
 import AgendamentoPrestacao from './entidades/agendamento-prestacao/agendamento-prestacao.model';
 import Visita from './entidades/visita/visita.model';
+import database from './database/database';
+import expressSession from "express-session";
+import authenticate from './middlewares/authenticate';
+import UnidadeFederativa from './entidades/unidade-federativa/unidade-federativa.model';
+import Cidade from './entidades/cidade/cidade.model';
+import Endereco from './entidades/endereco/endereco.model';
+import Usuario from './entidades/usuario/usuario.model';
+import Instituicao from './entidades/instituicao/instituicao.model';
+import Vara from './entidades/vara/vara.model';
+import Processo from './entidades/processo/processo.model';
+import Prestador from './entidades/prestador/prestador.model';
+import PerfilPermissaoUsuario from './entidades/perfil-permissao-usuario/perfil-permissao-usuario.model';
+import FichaMedica from './entidades/ficha-medica/ficha-medica.model';
+import Droga from './entidades/droga/droga.model';
+import Deficiencia from './entidades/deficiencia/deficiencia.model';
+import Pergunta from './entidades/pergunta/pergunta.model';
+import Resposta from './entidades/resposta/resposta.model';
+
 class Application {
     server: http.Server;
     express: express.Application;
@@ -54,7 +56,7 @@ class Application {
         this.express.use(routes);
     }
 
-    private _setSession(): void{
+    private _setSession(): void {
         this.express.use(expressSession({
             secret: 'secretJorge',
             resave: false,
@@ -90,6 +92,7 @@ class Application {
         Resposta.sync({ alter: true });
         AgendamentoPrestacao.sync({ alter: true });
         Visita.sync({ alter: true });
+        database.sync();
     }
 }
 

@@ -1,7 +1,8 @@
 import Sequelize, { Model } from 'sequelize';
 
-import database from '../../database/database';
 import Cidade from '../cidade/cidade.model';
+import database from '../../database/database';
+import Trabalho from '../trabalho/trabalho.model';
 import Instituicao from '../instituicao/instituicao.model';
 
 
@@ -31,7 +32,12 @@ Endereco.init(
 );
 
 Instituicao.belongsTo(Endereco, {
-    foreignKey:'enderecoId',
+    foreignKey: 'enderecoId',
+    as: 'endereco'
+});
+
+Trabalho.belongsTo(Endereco, {
+    foreignKey: 'enderecoId',
     as: 'endereco'
 });
 
