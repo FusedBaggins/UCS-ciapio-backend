@@ -7,6 +7,7 @@ import Endereco from "../endereco/endereco.model";
 import Usuario from "../usuario/usuario.model";
 import Processo from '../processo/processo.model';
 import { FichaMedica } from '../ficha-medica/ficha-medica.model';
+import Visita from '../visita/visita.model';
 
 
 export class Prestador extends Model {
@@ -78,6 +79,11 @@ Processo.belongsTo(Prestador, {
 
 FichaMedica.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
+Prestador.hasMany(Visita, {
+    foreignKey:'prestadorId',
     as: 'prestador'
 });
 

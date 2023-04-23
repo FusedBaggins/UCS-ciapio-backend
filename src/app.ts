@@ -23,6 +23,8 @@ import acl from 'express-acl';
 import authenticate from './middlewares/authenticate';
 import expressSession from "express-session";
 import Perfil from './enums/perfil';
+import AgendamentoPrestacao from './entidades/agendamento-prestacao/agendamento-prestacao.model';
+import Visita from './entidades/visita/visita.model';
 class Application {
     server: http.Server;
     express: express.Application;
@@ -86,6 +88,8 @@ class Application {
         Deficiencia.sync({ alter: true });
         Pergunta.sync({ alter: true });
         Resposta.sync({ alter: true });
+        AgendamentoPrestacao.sync({ alter: true });
+        Visita.sync({ alter: true });
     }
 }
 
