@@ -1,6 +1,7 @@
 import Sequelize, { DataTypes, Model } from 'sequelize';
 
 import Etnia from "../../enums/etnia";
+import Curso from '../curso/curso.model';
 import database from "../../database/database";
 import Usuario from "../usuario/usuario.model";
 import Endereco from "../endereco/endereco.model";
@@ -9,6 +10,7 @@ import Processo from '../processo/processo.model';
 import EstadoCivil from "../../enums/estado-civil";
 import Escolaridade from "../../enums/escolaridade";
 import Beneficio from '../beneficio/beneficio.model';
+import Habilidade from '../habilidade/habilidade.model';
 import FichaMedica from '../ficha-medica/ficha-medica.model';
 import AlternativaPenal from '../alternativa-penal/alternativa-penal.model';
 
@@ -97,6 +99,16 @@ AlternativaPenal.belongsTo(Prestador, {
 
 Beneficio.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
+Curso.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
+Habilidade.belongsTo(Prestador, {
+    foreignKey: 'prestaodorId',
     as: 'prestador'
 });
 
