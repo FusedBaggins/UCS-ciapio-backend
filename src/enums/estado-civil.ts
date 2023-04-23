@@ -1,10 +1,9 @@
 enum EstadoCivil {
-    Solteiro,
-    Casado,
-    Separado,
-    Divorciado,
-    Viuvo,
-  }
-  
-  export default EstadoCivil;
-  
+  Solteiro,
+  Casado,
+  Separado,
+  Divorciado,
+  Viuvo,
+}
+
+export default EstadoCivil;
