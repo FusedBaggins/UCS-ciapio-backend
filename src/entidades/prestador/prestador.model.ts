@@ -8,6 +8,7 @@ import Trabalho from '../trabalho/trabalho.model';
 import Processo from '../processo/processo.model';
 import EstadoCivil from "../../enums/estado-civil";
 import Escolaridade from "../../enums/escolaridade";
+import Beneficio from '../beneficio/beneficio.model';
 import FichaMedica from '../ficha-medica/ficha-medica.model';
 import AlternativaPenal from '../alternativa-penal/alternativa-penal.model';
 
@@ -90,6 +91,11 @@ Trabalho.belongsTo(Prestador, {
 });
 
 AlternativaPenal.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
+Beneficio.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });
