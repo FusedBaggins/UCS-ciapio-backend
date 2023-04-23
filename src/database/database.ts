@@ -18,6 +18,8 @@ import FichaMedica from '../entidades/ficha-medica/ficha-medica.model';
 import AlternativaPenal from '../entidades/alternativa-penal/alternativa-penal.model';
 import UnidadeFederativa from '../entidades/unidade-federativa/unidade-federativa.model';
 import PerfilPermissaoUsuario from '../entidades/perfil-permissao-usuario/perfil-permissao-usuario.model';
+import Beneficio from '../entidades/beneficio/beneficio.model';
+import Curso from '../entidades/curso/curso.model';
 
 class Database {
     connection!: Sequelize.Sequelize;
@@ -27,7 +29,7 @@ class Database {
     }
 
     sync(): void {
-        
+
         UnidadeFederativa.sync({ alter: true });
         Cidade.sync({ alter: true });
         Endereco.sync({ alter: true });
@@ -45,6 +47,8 @@ class Database {
         Deficiencia.sync({ alter: true });
         Trabalho.sync({ alter: true });
         AlternativaPenal.sync({ alter: true });
+        Beneficio.sync({ alter: true })
+        Curso.sync({ alter: true });
         Pergunta.sync({ alter: true });
         Resposta.sync({ alter: true });
     }
