@@ -1,20 +1,20 @@
 import Sequelize, { DataTypes, Model } from 'sequelize';
 
 import Etnia from "../../enums/etnia";
-import Curso from '../curso/curso.model';
 import Visita from '../visita/visita.model';
 import database from "../../database/database";
 import Usuario from "../usuario/usuario.model";
 import Endereco from "../endereco/endereco.model";
-import Trabalho from '../trabalho/trabalho.model';
 import Processo from '../processo/processo.model';
-import Familiar from '../familiar/familiar.model';
 import EstadoCivil from "../../enums/estado-civil";
 import Escolaridade from "../../enums/escolaridade";
-import Beneficio from '../beneficio/beneficio.model';
-import Habilidade from '../habilidade/habilidade.model';
-import FichaMedica from '../ficha-medica/ficha-medica.model';
-import AlternativaPenal from '../alternativa-penal/alternativa-penal.model';
+import AlternativaPenal from './entidades/alternativa-penal/alternativa-penal.model';
+import Beneficio from './entidades/beneficio/beneficio.model';
+import Curso from './entidades/curso/curso.model';
+import Familiar from './entidades/familiar/familiar.model';
+import FichaMedica from './entidades/ficha-medica/ficha-medica.model';
+import Habilidade from './entidades/habilidade/habilidade.model';
+import Trabalho from './entidades/trabalho/trabalho.model';
 
 
 export class Prestador extends Model {

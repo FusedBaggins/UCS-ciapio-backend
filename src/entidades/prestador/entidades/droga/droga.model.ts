@@ -1,6 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
-import database from '../../database/database';
+
 import UsoDroga from '../uso-droga/uso-droga.model';
+import database from '../../../../database/database';
 
 
 class Droga extends Model {

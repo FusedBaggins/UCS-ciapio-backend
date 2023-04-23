@@ -1,9 +1,9 @@
 
 import Sequelize, { Model } from 'sequelize';
 
-import database from "../../database/database";
+import Prestador from '../../prestador.model';
 import Pergunta from "../pergunta/pergunta.model";
-import Prestador from "../prestador/prestador.model";
+import database from '../../../../database/database';
 
 export class Resposta extends Model {
     id!: number;
@@ -30,7 +30,7 @@ Pergunta.belongsToMany(Prestador, {
 });
 
 Prestador.belongsToMany(Pergunta, {
-    through:Resposta,
+    through: Resposta,
     foreignKey: 'prestadorId'
 });
 

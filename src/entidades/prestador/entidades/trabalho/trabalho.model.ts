@@ -1,8 +1,9 @@
 import Sequelize, { Model } from 'sequelize';
 
-import database from '../../database/database';
-import Endereco from '../endereco/endereco.model';
-import Prestador from '../prestador/prestador.model';
+import Prestador from '../../prestador.model';
+import database from '../../../../database/database';
+import Endereco from '../../../endereco/endereco.model';
+
 
 export class Trabalho extends Model {
     id!: number;

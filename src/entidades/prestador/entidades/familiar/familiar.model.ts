@@ -1,7 +1,8 @@
 import Sequelize, { Model } from 'sequelize';
 
-import database from '../../database/database';
-import Prestador from '../prestador/prestador.model';
+import Prestador from '../../prestador.model';
+import database from '../../../../database/database';
+
 
 export class Familiar extends Model {
     id!: number;

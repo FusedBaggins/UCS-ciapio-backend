@@ -2,8 +2,8 @@ import Sequelize, { Model } from 'sequelize';
 
 import Cidade from '../cidade/cidade.model';
 import database from '../../database/database';
-import Trabalho from '../trabalho/trabalho.model';
 import Instituicao from '../instituicao/instituicao.model';
+import Trabalho from '../prestador/entidades/trabalho/trabalho.model';
 
 
 class Endereco extends Model {

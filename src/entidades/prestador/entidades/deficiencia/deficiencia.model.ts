@@ -1,5 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
-import database from '../../database/database';
+
+import database from '../../../../database/database';
 
 
 class Deficiencia extends Model {
