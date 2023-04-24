@@ -39,20 +39,16 @@ Usuario.addHook('beforeSave', async (usuario: Usuario): Promise<void> => {
         usuario.hash = await bcrypt.hash(usuario.senha, 8);
 });
 
-
 Usuario.hasMany(PerfilPermissaoUsuario, {
     foreignKey:'usuarioId',
-    as: 'perfisPermissao'
 });
 
 Usuario.hasMany(AgendamentoPrestacao, {
     foreignKey:'usuarioId',
-    as: 'usuario'
 });
 
 Usuario.hasMany(AtestadoComparecimento, {
     foreignKey:'usuarioAtendimentoId',
-    as: 'usuarioAtendimento'
 });
 
 export default Usuario;
