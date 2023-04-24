@@ -30,34 +30,6 @@ class Database {
     constructor() {
         this.connection = new Sequelize.Sequelize(options);
     }
-
-    sync(): void {
-
-        UnidadeFederativa.sync({ alter: true });
-        Cidade.sync({ alter: true });
-        Endereco.sync({ alter: true });
-        Usuario.sync({ alter: true });
-        Instituicao.sync({ alter: true });
-
-        Vara.sync({ alter: true });
-        Processo.sync({ alter: true });
-
-        Prestador.sync({ alter: true });
-        PerfilPermissaoUsuario.sync({ alter: true });
-        FichaMedica.sync({ alter: true });
-        Droga.sync({ alter: true });
-        UsoDroga.sync({ alter: true });
-        Deficiencia.sync({ alter: true });
-        Trabalho.sync({ alter: true });
-        AlternativaPenal.sync({ alter: true });
-        Beneficio.sync({ alter: true })
-        Curso.sync({ alter: true });
-        Pergunta.sync({ alter: true });
-        Resposta.sync({ alter: true });
-        AtestadoComparecimento.sync({ alter: true });
-        Visita.sync({ alter: true });
-        AgendamentoPrestacao.sync({ alter: true });
-    }
 }
 
 export default new Database();
