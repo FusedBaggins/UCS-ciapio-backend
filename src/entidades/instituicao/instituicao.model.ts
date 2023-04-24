@@ -42,17 +42,14 @@ Instituicao.init(
 
 Usuario.belongsTo(Instituicao, {
     foreignKey:'instituicaoId',
-    as: 'instituicao'
 });
 
 Instituicao.hasOne(Visita, {
     foreignKey:'instituicaoId',
-    as: 'instituicao'
 });
 
 Instituicao.hasMany(AtestadoComparecimento, {
     foreignKey:'instituicaoId',
-    as: 'instituicao'
 });
 
 export default Instituicao;

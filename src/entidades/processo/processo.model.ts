@@ -50,18 +50,15 @@ Processo.init(
 );
 
 Processo.hasOne(AgendamentoPrestacao, {
-    foreignKey:'processoId',
-    as: 'processo'
+    foreignKey: 'processoId',
 });
 
 Processo.hasMany(Visita, {
     foreignKey: 'processoId',
-    as: 'processo'
 });
 
 Processo.hasMany(AtestadoComparecimento, {
-    foreignKey:'processoId',
-    as: 'processo'
+    foreignKey: 'processoId',
 });
 
 export default Processo;
