@@ -9,6 +9,7 @@ import instituicaoController from "./entidades/instituicao/instituicao.controlle
 import perguntaController from "./entidades/prestador/entidades/pergunta/pergunta.controller";
 import respostaController from "./entidades/prestador/entidades/resposta/resposta.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
+import Menu from "./helpers/functional/menu";
 
 const routes = Router();
 
@@ -30,5 +31,5 @@ routes.get('/resposta/', respostaController.list);
 routes.get('/resposta/:id', respostaController.detail);
 routes.get('/processo/', processoController.list);
 routes.get('/processo/:id', processoController.detail);
-
+routes.get('/menu/', Menu.getMenu)
 export default routes;

@@ -10,6 +10,7 @@ import Perfil from './enums/perfil';
 import expressSession from "express-session";
 import { databaseSync } from './database/sync';
 import authenticate from './middlewares/authenticate';
+import aclRules from '../acl-rules';
 
 class Application {
     server: http.Server;
@@ -50,6 +51,7 @@ class Application {
 
     private _setAclExpress(): void {
         acl.config({
+            rules: aclRules,
             baseUrl: '/',
             decodedObjectName: 'user',
             roleSearchPath: 'session.user.role',
