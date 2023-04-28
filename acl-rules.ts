@@ -3,30 +3,45 @@ const aclRules = [
       group: "usuarioCIAP",
       permissions: [
         {
-          resource: "/processo/",
+          resource: "/processo/*",
           methods: ["POST", "GET", "PUT"],
           action: "allow",
           name: "Processos",
           visible: true,
         },
         {
-            resource: "/menu/",
+            resource: "/menu/*",
             methods: ["POST", "GET", "PUT"],
             action: "allow",
             name: "Menus",
             visible: false,
-          }
+        },
+        {
+          resource: "/login/*",
+          methods: "*",
+          action: "allow",
+          name: "Login",
+          visible: false,
+        },
       ]
     },
     {
       group: "usuarioEntidade",
       permissions: [
         {
-          resource: "*",
+          resource: "/login/*",
           methods: "*",
-          action: "deny",
+          action: "allow",
+          name: "Login",
           visible: false,
-        }
+        },
+        {
+          resource: "/menu/*",
+          methods: ["POST", "GET", "PUT"],
+          action: "allow",
+          name: "Menus",
+          visible: false,
+        },
       ]
     }
 ];

@@ -1,8 +1,9 @@
 enum Perfil {
-    UsuarioCIAP = 'usuarioCIAP',
-    UsuarioEntidade = 'usuarioEntidade',
-    Administrador = 'Administrador',
+    usuarioCIAP = 1,
+    usuarioEntidade = 2,
+    Administrador = 3,
 }
+
   
 export default Perfil;
   

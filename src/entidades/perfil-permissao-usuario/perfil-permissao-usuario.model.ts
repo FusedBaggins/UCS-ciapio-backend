@@ -13,12 +13,8 @@ class PerfilPermissaoUsuario extends Model {
 
 PerfilPermissaoUsuario.init(
     {
-        nome: { type: Sequelize.STRING, allowNull: false },
         perfil: {
             type: DataTypes.INTEGER,
-            validate: {
-                isIn: [[...Object.values(Perfil)]],
-            },
             allowNull: false,
         },
     },

@@ -34,9 +34,12 @@ Usuario.init(
     }
 );
 
-Usuario.addHook('beforeSave', async (usuario: Usuario): Promise<void> => {
+Usuario.beforeValidate((usuario: Usuario) => {
     if (usuario.senha)
-        usuario.hash = await bcrypt.hash(usuario.senha, 8);
+        return bcrypt.hash(usuario.senha, 8)
+            .then((hash) => {
+                usuario.hash = hash;
+            })
 });
 
 Usuario.hasMany(PerfilPermissaoUsuario, {

@@ -11,6 +11,9 @@ import expressSession from "express-session";
 import { databaseSync } from './database/sync';
 import authenticate from './middlewares/authenticate';
 import aclRules from '../acl-rules';
+import passport from 'passport';
+import flash from 'connect-flash';
+import authenticationValidate from './middlewares/authenticationValidate';
 
 class Application {
     server: http.Server;
@@ -33,8 +36,8 @@ class Application {
         }));
         this.express.use(express.json());
         this.express.use(bodyParser.urlencoded({ extended: true }));
-        this.express.use(authenticate);
         this.express.use(acl.authorize);
+        this.express.use(authenticationValidate);
     }
 
     private _setRoutes(): void {
@@ -47,6 +50,11 @@ class Application {
             resave: false,
             saveUninitialized: false,
         }));
+
+        this.express.use(flash())
+        this.express.use(passport.initialize());
+        this.express.use(passport.session());
+        authenticate.initAuthenticateMethods(); 
     }
 
     private _setAclExpress(): void {
@@ -55,7 +63,7 @@ class Application {
             baseUrl: '/',
             decodedObjectName: 'user',
             roleSearchPath: 'session.user.role',
-            defaultRole: Perfil.UsuarioEntidade,
+            defaultRole: Perfil[Perfil.usuarioEntidade],
         });
     }
 
