@@ -43,7 +43,7 @@ routes.post('/', (req: Request, res: Response) => {
 });
 
 routes.get('/login', (req: Request, res: Response) => {
-  res.send('Olá').status(200);
+  res.send('Você foi redirecionado para página de login (alterar este redirect)').status(200);
 });
 
 routes.post('/unauthorized', (req: Request, res: Response) => {
