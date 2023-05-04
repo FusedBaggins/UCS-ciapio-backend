@@ -14,6 +14,7 @@ import aclRules from '../acl-rules';
 import passport from 'passport';
 import flash from 'connect-flash';
 import authenticationValidate from './middlewares/authenticationValidate';
+import { AuthenticatedRequest } from '..';
 
 class Application {
     server: http.Server;
@@ -26,6 +27,11 @@ class Application {
         this._setSession();
         this._setAclExpress();
         this._setMiddlewares();
+
+        this.express.use((req, res, next) => {
+            const reqAuthenticated = req as AuthenticatedRequest;
+            next();
+          });
         this._setRoutes();
         databaseSync();
     }
@@ -55,6 +61,8 @@ class Application {
         this.express.use(passport.initialize());
         this.express.use(passport.session());
         authenticate.initAuthenticateMethods(); 
+
+       
     }
 
     private _setAclExpress(): void {
@@ -63,8 +71,10 @@ class Application {
             baseUrl: '/',
             decodedObjectName: 'user',
             roleSearchPath: 'session.user.role',
-            defaultRole: Perfil[Perfil.usuarioEntidade],
+            defaultRole: Perfil[Perfil.deslogado],
         });
+
+       
     }
 
 

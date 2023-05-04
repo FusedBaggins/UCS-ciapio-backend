@@ -16,17 +16,22 @@ const aclRules = [
             name: "Menus",
             visible: false,
         },
+      ]
+    },
+    {
+      group: "usuarioEntidade",
+      permissions: [
         {
-          resource: "/login/*",
-          methods: "*",
+          resource: "/menu/*",
+          methods: ["POST", "GET", "PUT"],
           action: "allow",
-          name: "Login",
+          name: "Menus",
           visible: false,
         },
       ]
     },
     {
-      group: "usuarioEntidade",
+      group: "deslogado",
       permissions: [
         {
           resource: "/login/*",
@@ -36,13 +41,13 @@ const aclRules = [
           visible: false,
         },
         {
-          resource: "/menu/*",
-          methods: ["POST", "GET", "PUT"],
+          resource: "/usuario/",
+          methods:  ["POST"],
           action: "allow",
-          name: "Menus",
+          name: "Criar usuário",
           visible: false,
         },
-      ]
+      ],
     }
 ];
 export default aclRules;

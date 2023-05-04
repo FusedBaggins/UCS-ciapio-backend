@@ -24,8 +24,7 @@ routes.get('/endereco/', enderecoController.list);
 routes.get('/endereco/:id', enderecoController.detail);
 routes.get('/instituicao/', instituicaoController.list);
 routes.get('/instituicao/:id', instituicaoController.detail);
-routes.get('/usuario/', usuarioController.list);
-routes.get('/usuario/:id', usuarioController.detail);
+
 routes.get('/vara/', varaController.list);
 routes.get('/vara/:id', varaController.detail);
 routes.get('/pergunta/', perguntaController.list);
@@ -34,6 +33,11 @@ routes.get('/resposta/', respostaController.list);
 routes.get('/resposta/:id', respostaController.detail);
 routes.get('/processo/', processoController.list);
 routes.get('/processo/:id', processoController.detail);
+
+
+routes.get('/usuario/', usuarioController.list);
+routes.get('/usuario/:id', usuarioController.detail);
+routes.post('/usuario/', usuarioController.create);
 
 routes.get('/menu', (req: Request, res: Response) =>
   Menu.getMenu(req as AuthenticatedRequest, res));
