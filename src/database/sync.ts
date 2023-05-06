@@ -1,7 +1,8 @@
 import { entidades } from "./constants/entidades";
 
 export function databaseSync(): void {
-    entidades.forEach((entidade: any) => {
-        entidade?.sync({ alter: true });
+    entidades.forEach(async (entidade: any) => {
+        await entidade?.sync({ alter: true });
     });
+
 }

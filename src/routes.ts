@@ -39,31 +39,23 @@ routes.get('/usuario/', usuarioController.list);
 routes.get('/usuario/:id', usuarioController.detail);
 routes.post('/usuario/', usuarioController.create);
 
-routes.get('/menu', (req: Request, res: Response) =>
+routes.get('/menu/', (req: Request, res: Response) =>
   Menu.getMenu(req as AuthenticatedRequest, res));
 
-routes.post('/', (req: Request, res: Response) => {
-  res.sendStatus(200);
+routes.get('/login/', (req: Request, res: Response) => {
+  res.json({ mensagem: 'Você foi redirecionado para página de login (alterar este redirect)' }).status(200);
 });
 
-routes.get('/login', (req: Request, res: Response) => {
-  res.send('Você foi redirecionado para página de login (alterar este redirect)').status(200);
-});
-
-routes.post('/unauthorized', (req: Request, res: Response) => {
+routes.post('/unauthorized/', (req: Request, res: Response) => {
   const mensagem = req.flash('error');
-  res.status(401).send({ mensagem });
+  res.status(401).json({ mensagem });
 });
 
 routes.post(
   "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/unauthorized",
-    failureFlash: true,
-    session: true,
-  })
-);
+  passport.authenticate("local"),
+  (req: Request, res: Response) =>  res.status(200).send()
 
+);
 
 export default routes;
