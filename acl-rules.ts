@@ -34,7 +34,7 @@ const aclRules = [
       group: "deslogado",
       permissions: [
         {
-          resource: "/login/*",
+          resource: "/login",
           methods: "*",
           action: "allow",
           name: "Login",

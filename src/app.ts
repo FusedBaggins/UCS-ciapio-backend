@@ -27,11 +27,6 @@ class Application {
         this._setSession();
         this._setAclExpress();
         this._setMiddlewares();
-
-        this.express.use((req, res, next) => {
-            const reqAuthenticated = req as AuthenticatedRequest;
-            next();
-          });
         this._setRoutes();
         databaseSync();
     }
