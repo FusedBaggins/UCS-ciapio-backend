@@ -3,7 +3,7 @@ import aclRules from "../../../acl-rules"
 import mapperAclPermissao from "../mappers/mapperAclPermissao";
 import { Response } from 'express';
 
-class Menu {
+class MenuService {
     static convertRulesToPermissoesUsuario(perfil: string) {
         return aclRules.find(x => {
             return x.group == perfil
@@ -15,11 +15,11 @@ class Menu {
     static async getMenu(req: AuthenticatedRequest, res: Response): Promise<any> {
         const perfil = req.user?.role || "";
         if (perfil) {
-            let permissoesUsuario = Menu.convertRulesToPermissoesUsuario(perfil);
+            let permissoesUsuario = MenuService.convertRulesToPermissoesUsuario(perfil);
             return res.status(200).json(permissoesUsuario);
         }
         return res.status(200).json([]);
     };
 }
 
-export default Menu;
+export default MenuService;

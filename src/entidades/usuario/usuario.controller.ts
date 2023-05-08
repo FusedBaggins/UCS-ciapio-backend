@@ -22,13 +22,13 @@ export default {
      * @param {string} nome
      * @param {string} senha
      * @param {string} usuario 
-     * @param {number[]} perfisPermissao
+     * @param {object} perfisPermissao
     */
-    async create(req: Request, res: Response): Promise<any> {
-        const usuario = toEntityUsuario(req);
-        await usuario.save();
+    async save(req: Request, res: Response): Promise<any> {
+        const usuario = await toEntityUsuario(req);
 
-        const permissoes = toEntityPerfilPermissao(req, usuario);
+        await usuario.save();
+        const permissoes = await toEntityPerfilPermissao(req, usuario);
         for (const item of permissoes) {
             await item.save();
         }
@@ -38,12 +38,5 @@ export default {
                 id: usuario.id,
             });
         });
-
     },
-    // edit(req: Request, res: Response): any {
-    //     return res.status(200).json({});
-    // },
-    // delete(req: Request, res: Response): any {
-    //     return res.status(200).json({});
-    // }
 }

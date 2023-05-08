@@ -16,6 +16,13 @@ const aclRules = [
             name: "Menus",
             visible: false,
         },
+        {
+          resource: "/usuario",
+          methods:  ["POST"],
+          action: "allow",
+          name: "Criar usuário",
+          visible: false,
+        },
       ]
     },
     {

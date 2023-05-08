@@ -9,7 +9,7 @@ import instituicaoController from "./entidades/instituicao/instituicao.controlle
 import perguntaController from "./entidades/prestador/entidades/pergunta/pergunta.controller";
 import respostaController from "./entidades/prestador/entidades/resposta/resposta.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
-import Menu from "./helpers/functional/menu";
+import MenuService from "./helpers/services/menuService";
 import passport from "passport";
 import { Response, Request } from "express";
 import { AuthenticatedRequest } from "..";
@@ -37,10 +37,10 @@ routes.get('/processo/:id', processoController.detail);
 
 routes.get('/usuario/', usuarioController.list);
 routes.get('/usuario/:id', usuarioController.detail);
-routes.post('/usuario/', usuarioController.create);
+routes.post('/usuario/', usuarioController.save);
 
 routes.get('/menu/', (req: Request, res: Response) =>
-  Menu.getMenu(req as AuthenticatedRequest, res));
+  MenuService.getMenu(req as AuthenticatedRequest, res));
 
 routes.get('/login/', (req: Request, res: Response) => {
   res.json({ mensagem: 'Você foi redirecionado para página de login (alterar este redirect)' }).status(200);
