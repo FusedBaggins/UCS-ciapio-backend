@@ -8,7 +8,6 @@ import Perfil from '../../enums/perfil';
 class PerfilPermissaoUsuario extends Model {
     id!: number;
     perfil!: number;
-    usuario!: Usuario;
     usuarioId!: number;
 }
 

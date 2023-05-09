@@ -1,13 +1,14 @@
 import Perfil from '../enums/perfil';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import Login from '../helpers/functional/login';
+import UsuarioService from '../helpers/services/usuarioService';
 import bcrypt from 'bcryptjs';
 
 class Authenticate {
   static async initAuthenticateMethods() {
     passport.use(new LocalStrategy(async (username, password, done) => {
-      const user = await Login.getUsuarioByNome(username);
+      const user = await UsuarioService.getUsuarioByNome(username);
+      console.log(username);
       if (user) {
         bcrypt.compare(password, user.hash, (err, res) => {
           if (res) {
@@ -30,12 +31,12 @@ class Authenticate {
 
   static deserializeUser() {
     passport.deserializeUser(async (id: string, done) => {
-      const user = await Login.getUsuarioById(id);
+      const user = await UsuarioService.getById(id);
       if(user){
-        const perfil = await Login.getPerfilByUsuarioId(user!.id);
+        const perfil = await UsuarioService.getPerfilByUsuarioId(user!.id);
         done(null, {
           user,
-          role: Perfil[perfil!.perfil]
+          role: perfil?.perfil ? Perfil[perfil.perfil] : Perfil.deslogado,
         });
         return;
       }

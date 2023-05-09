@@ -9,10 +9,11 @@ import instituicaoController from "./entidades/instituicao/instituicao.controlle
 import perguntaController from "./entidades/prestador/entidades/pergunta/pergunta.controller";
 import respostaController from "./entidades/prestador/entidades/resposta/resposta.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
-import Menu from "./helpers/functional/menu";
+import MenuService from "./helpers/services/menuService";
 import passport from "passport";
 import { Response, Request } from "express";
 import { AuthenticatedRequest } from "..";
+import prestadorController from "./entidades/prestador/prestador.controller";
 
 const routes = Router();
 
@@ -24,6 +25,7 @@ routes.get('/endereco/', enderecoController.list);
 routes.get('/endereco/:id', enderecoController.detail);
 routes.get('/instituicao/', instituicaoController.list);
 routes.get('/instituicao/:id', instituicaoController.detail);
+routes.post('/instituicao/', instituicaoController.save);
 
 routes.get('/vara/', varaController.list);
 routes.get('/vara/:id', varaController.detail);
@@ -34,13 +36,19 @@ routes.get('/resposta/:id', respostaController.detail);
 routes.get('/processo/', processoController.list);
 routes.get('/processo/:id', processoController.detail);
 
+routes.get('/prestador/', prestadorController.list);
+routes.get('/prestador/:id', prestadorController.detail);
+
+routes.get('/ciap/', instituicaoController.listCIAP);
+routes.get('/ciap/:id', instituicaoController.detail);
+
 
 routes.get('/usuario/', usuarioController.list);
 routes.get('/usuario/:id', usuarioController.detail);
-routes.post('/usuario/', usuarioController.create);
+routes.post('/usuario/', usuarioController.save);
 
 routes.get('/menu/', (req: Request, res: Response) =>
-  Menu.getMenu(req as AuthenticatedRequest, res));
+  MenuService.getMenu(req as AuthenticatedRequest, res));
 
 routes.get('/login/', (req: Request, res: Response) => {
   res.json({ mensagem: 'Você foi redirecionado para página de login (alterar este redirect)' }).status(200);

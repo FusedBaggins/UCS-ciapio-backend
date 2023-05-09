@@ -1,7 +1,7 @@
 import PerfilPermissaoUsuario from "../../entidades/perfil-permissao-usuario/perfil-permissao-usuario.model";
 import Usuario from "../../entidades/usuario/usuario.model";
 
-class Login {
+class UsuarioService {
     static async getUsuarioByNome(nome: string) {
         return await Usuario.findOne({
             where: {
@@ -9,7 +9,7 @@ class Login {
             }
         });
     }
-    static async getUsuarioById(id: string) {
+    static async getById(id: string) {
         return await Usuario.findByPk(id);
     }
 
@@ -22,4 +22,4 @@ class Login {
     }
 }
 
-export default Login;
+export default UsuarioService;
