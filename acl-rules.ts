@@ -28,7 +28,7 @@ const aclRules = [
           methods: ["POST", "GET", "PUT"],
           action: "allow",
           name: "CIAP",
-          visible: true,
+          visible: false,
         },
         {
           resource: "/usuario",
@@ -36,6 +36,13 @@ const aclRules = [
           action: "allow",
           name: "Criar usuário",
           visible: false,
+        },
+        {
+          resource: "/prestador/*",
+          methods: ["POST", "GET", "PUT"],
+          action: "allow",
+          name: "Prestador",
+          visible: true,
         },
       ]
     },
