@@ -7,7 +7,7 @@ const aclRules = [
           methods: ["POST", "GET", "PUT"],
           action: "allow",
           name: "Processos",
-          visible: true,
+          visible: false,
         },
         {
             resource: "/menu/*",
@@ -28,7 +28,7 @@ const aclRules = [
           methods: ["POST", "GET", "PUT"],
           action: "allow",
           name: "CIAP",
-          visible: true,
+          visible: false,
         },
         {
           resource: "/instituicao-parceira/*",
@@ -43,6 +43,34 @@ const aclRules = [
           action: "allow",
           name: "Criar usuário",
           visible: false,
+        },
+        {
+          resource: "/profissional/*",
+          methods: ["POST", "GET", "PUT"],
+          action: "allow",
+          name: "Profissional",
+          visible: true,
+        },
+        {
+          resource: "/prestadores/*",
+          methods: ["POST", "GET", "PUT"],
+          action: "allow",
+          name: "Prestadores",
+          visible: true,
+        },
+        {
+          resource: "/entrevistas/*",
+          methods: ["POST", "GET", "PUT"],
+          action: "allow",
+          name: "Entrevistas",
+          visible: true,
+        },
+        {
+          resource: "/visita/entidade_parceira/*",
+          methods: ["POST", "GET", "PUT"],
+          action: "allow",
+          name: "Visitas à entidade parceira",
+          visible: true,
         },
       ]
     },
