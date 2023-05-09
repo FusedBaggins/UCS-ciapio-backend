@@ -20,6 +20,18 @@ class UsuarioService {
             }
         });
     }
+
+    static async save(campos: Record<string, any>) {
+        let entidade = await UsuarioService.getById(campos.id);
+        if (entidade) {
+            await entidade.update(campos);
+        }
+        else {
+            entidade = Usuario.build(campos);
+            await entidade.save();
+        }
+        return entidade;
+    }
 }
 
 export default UsuarioService;

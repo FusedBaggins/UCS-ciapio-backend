@@ -8,7 +8,6 @@ class Authenticate {
   static async initAuthenticateMethods() {
     passport.use(new LocalStrategy(async (username, password, done) => {
       const user = await UsuarioService.getUsuarioByNome(username);
-      console.log(username);
       if (user) {
         bcrypt.compare(password, user.hash, (err, res) => {
           if (res) {

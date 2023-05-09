@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Instituicao from "./instituicao.model";
 import TipoInstituicao from "../../enums/tipo-instituicao";
+import InstituicaoService from "../../helpers/services/instituicaoService";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -15,7 +16,7 @@ export default {
                 tipo_instituicao: TipoInstituicao.Ciap,
             }
         });
-        
+
         if (entidade)
             return res.status(200).json(entidade);
         return res.status(404).json({});
@@ -27,7 +28,7 @@ export default {
                 tipo_instituicao: TipoInstituicao.EntidadeParceira,
             }
         });
-        
+
         if (entidade)
             return res.status(200).json(entidade);
         return res.status(404).json({});
@@ -41,10 +42,13 @@ export default {
         return res.status(404).json({});
     },
     async save(req: Request, res: Response): Promise<any> {
-        const buildOptions:any = { exclude: ['endereco'] };
-        const entidade = Instituicao.build(req.body, buildOptions);
-
-        await entidade.save();
-        return res.status(200).json({id: entidade.id});
+        try {
+            const entidade = await InstituicaoService.save(req.body);
+            return res.status(200).json({ id: entidade?.id });
+        }
+        catch (error) {
+            console.error(error);
+            return res.status(400).json(error);
+        }
     },
 }

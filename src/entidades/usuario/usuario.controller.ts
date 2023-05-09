@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Usuario from "./usuario.model";
-import toEntityUsuario from "../../helpers/classes/mappers/toEntityUsuario";
-import toEntityPerfilPermissao from "../../helpers/classes/mappers/toEntityPerfilPermissao";
+import UsuarioService from "../../helpers/services/usuarioService";
+import PerfilPermissaoUsuarioService from "../../helpers/services/perfilPermissaoService";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -25,12 +25,13 @@ export default {
      * @param {object} perfisPermissao
     */
     async save(req: Request, res: Response): Promise<any> {
-        const usuario = await toEntityUsuario(req);
+        const usuario = await UsuarioService.save(req.body);
 
-        await usuario.save();
-        const permissoes = await toEntityPerfilPermissao(req, usuario);
-        for (const item of permissoes) {
-            await item.save();
+        const permissoes = req.body.perfisPermissao;
+        if (Array.isArray(permissoes)) {
+            for (const item of permissoes) {
+                await PerfilPermissaoUsuarioService.save(item);
+            }
         }
 
         req.login(usuario, () => {
