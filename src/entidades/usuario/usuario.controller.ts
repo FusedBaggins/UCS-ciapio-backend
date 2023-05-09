@@ -25,19 +25,24 @@ export default {
      * @param {object} perfisPermissao
     */
     async save(req: Request, res: Response): Promise<any> {
-        const usuario = await UsuarioService.save(req.body);
-
-        const permissoes = req.body.perfisPermissao;
-        if (Array.isArray(permissoes)) {
-            for (const item of permissoes) {
-                await PerfilPermissaoUsuarioService.save(item);
+        try {
+            const usuario = await UsuarioService.save(req.body);
+            const permissoes = req.body.perfisPermissao;
+            if (Array.isArray(permissoes)) {
+                for (const item of permissoes) {
+                    await PerfilPermissaoUsuarioService.save(item);
+                }
             }
-        }
 
-        req.login(usuario, () => {
-            return res.status(200).json({
-                id: usuario.id,
+            req.login(usuario, () => {
+                return res.status(200).json({
+                    id: usuario.id,
+                });
             });
-        });
+        }
+        catch (error) {
+            console.error(error);
+            return res.status(400).json(error);
+        }
     },
 }
