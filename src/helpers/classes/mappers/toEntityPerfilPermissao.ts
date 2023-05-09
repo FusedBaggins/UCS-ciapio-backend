@@ -19,7 +19,7 @@ const toEntityPerfilPermissao = async (req: Request, usuario: Usuario | null) =>
         for (const item of perfilPermissaoArray) {
             let permissao: PerfilPermissaoUsuario | null;
             if (item.id) {
-                permissao = await PerfilPermissaoUsuarioService.getPerfilById(item.id);
+                permissao = await PerfilPermissaoUsuarioService.getById(item.id);
                 if (permissao == null)
                     permissao = new PerfilPermissaoUsuario();
             }

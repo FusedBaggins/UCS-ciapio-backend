@@ -31,7 +31,7 @@ class Authenticate {
 
   static deserializeUser() {
     passport.deserializeUser(async (id: string, done) => {
-      const user = await UsuarioService.getUsuarioById(id);
+      const user = await UsuarioService.getById(id);
       if(user){
         const perfil = await UsuarioService.getPerfilByUsuarioId(user!.id);
         done(null, {

@@ -13,6 +13,7 @@ import MenuService from "./helpers/services/menuService";
 import passport from "passport";
 import { Response, Request } from "express";
 import { AuthenticatedRequest } from "..";
+import prestadorController from "./entidades/prestador/prestador.controller";
 
 const routes = Router();
 
@@ -24,6 +25,7 @@ routes.get('/endereco/', enderecoController.list);
 routes.get('/endereco/:id', enderecoController.detail);
 routes.get('/instituicao/', instituicaoController.list);
 routes.get('/instituicao/:id', instituicaoController.detail);
+routes.post('/instituicao/', instituicaoController.save);
 
 routes.get('/vara/', varaController.list);
 routes.get('/vara/:id', varaController.detail);
@@ -33,6 +35,12 @@ routes.get('/resposta/', respostaController.list);
 routes.get('/resposta/:id', respostaController.detail);
 routes.get('/processo/', processoController.list);
 routes.get('/processo/:id', processoController.detail);
+
+routes.get('/prestador/', prestadorController.list);
+routes.get('/prestador/:id', prestadorController.detail);
+
+routes.get('/ciap/', instituicaoController.listCIAP);
+routes.get('/ciap/:id', instituicaoController.detail);
 
 
 routes.get('/usuario/', usuarioController.list);

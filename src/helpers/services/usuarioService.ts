@@ -9,7 +9,7 @@ class UsuarioService {
             }
         });
     }
-    static async getUsuarioById(id: string) {
+    static async getById(id: string) {
         return await Usuario.findByPk(id);
     }
 

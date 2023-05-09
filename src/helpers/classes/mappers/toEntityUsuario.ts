@@ -5,7 +5,7 @@ import UsuarioService from "../../services/usuarioService";
 const toEntityUsuario = async (req: Request) => {
     let usuario: Usuario | null;
     if (req.body.idUsuario) {
-        usuario = await UsuarioService.getUsuarioById(req.body.idUsuario);
+        usuario = await UsuarioService.getById(req.body.idUsuario);
         if (usuario == null)
             usuario = new Usuario();
     }
