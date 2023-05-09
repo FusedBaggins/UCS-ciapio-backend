@@ -23,9 +23,6 @@ routes.get('/cidade/', cidadeControler.list);
 routes.get('/cidade/:id', cidadeControler.detail);
 routes.get('/endereco/', enderecoController.list);
 routes.get('/endereco/:id', enderecoController.detail);
-routes.get('/instituicao/', instituicaoController.list);
-routes.get('/instituicao/:id', instituicaoController.detail);
-routes.post('/instituicao/', instituicaoController.save);
 
 routes.get('/vara/', varaController.list);
 routes.get('/vara/:id', varaController.detail);
@@ -41,7 +38,11 @@ routes.get('/prestador/:id', prestadorController.detail);
 
 routes.get('/ciap/', instituicaoController.listCIAP);
 routes.get('/ciap/:id', instituicaoController.detail);
+routes.post('/ciap/', instituicaoController.save);
 
+routes.get('/instituicao-parceira/', instituicaoController.listCIAP);
+routes.get('/instituicao-parceira/:id', instituicaoController.detail);
+routes.post('/instituicao-parceira/', instituicaoController.save);
 
 routes.get('/usuario/', usuarioController.list);
 routes.get('/usuario/:id', usuarioController.detail);

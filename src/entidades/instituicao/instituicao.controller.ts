@@ -21,6 +21,18 @@ export default {
         return res.status(404).json({});
     },
 
+    async listInstituicaoParceira(req: Request, res: Response): Promise<any> {
+        let entidade = await Instituicao.findAll({
+            where: {
+                tipo_instituicao: TipoInstituicao.EntidadeParceira,
+            }
+        });
+        
+        if (entidade)
+            return res.status(200).json(entidade);
+        return res.status(404).json({});
+    },
+
     async detail(req: Request, res: Response): Promise<any> {
         let entidade: Instituicao | null = await Instituicao.findByPk(req.params.id);
         if (entidade)

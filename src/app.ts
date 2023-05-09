@@ -61,6 +61,9 @@ class Application {
             secret: 'secretJorge',
             resave: false,
             saveUninitialized: false,
+            cookie: {
+                maxAge: 1000 * 60 * 60 * 24,
+            },
         }));
 
         this.express.use(flash())
