@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Instituicao from "./instituicao.model";
 import TipoInstituicao from "../../enums/tipo-instituicao";
-import toEntityInstituicao from "../../helpers/classes/mappers/toEntityInstituicao";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
