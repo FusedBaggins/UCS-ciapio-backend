@@ -15,6 +15,7 @@ interface AuthenticatedRequest extends Request {
   isAuthenticated: () => boolean;
 }
 
-interface extendedUser extends Usuario{
+interface extendedUser{
+  user: Usuario;
   role: string;
 }

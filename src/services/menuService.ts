@@ -1,6 +1,6 @@
-import { AuthenticatedRequest } from "../../..";
-import aclRules from "../../../acl-rules"
-import mapperAclPermissao from "../mappers/mapperAclPermissao";
+import { AuthenticatedRequest } from "../..";
+import aclRules from "../../acl-rules"
+import mapperAclPermissao from "../helpers/mappers/mapperAclPermissao";
 import { Response } from 'express';
 
 class MenuService {

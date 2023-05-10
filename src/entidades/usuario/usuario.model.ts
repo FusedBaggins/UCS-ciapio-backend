@@ -5,6 +5,7 @@ import database from '../../database/database';
 import PerfilPermissaoUsuario from '../perfil-permissao-usuario/perfil-permissao-usuario.model';
 import AgendamentoPrestacao from '../agendamento-prestacao/agendamento-prestacao.model';
 import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
+import Instituicao from '../instituicao/instituicao.model';
 
 class Usuario extends Model {
     id!: number;
@@ -15,6 +16,8 @@ class Usuario extends Model {
     ativo!: boolean;
     administrador!: boolean;
     data_inativacao!: Date;
+    instituicao?: Instituicao;
+    instituicaoId?: number;
 }
 
 Usuario.init(

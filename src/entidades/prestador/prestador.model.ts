@@ -124,4 +124,9 @@ Familiar.belongsTo(Prestador, {
     as: 'prestador'
 });
 
+Prestador.belongsTo(Usuario, {
+    foreignKey: 'usuarioId',
+    as: 'usuario'
+});
+
 export default Prestador;

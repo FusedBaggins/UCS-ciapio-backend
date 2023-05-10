@@ -1,7 +1,7 @@
 import Perfil from '../enums/perfil';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import UsuarioService from '../helpers/services/usuarioService';
+import UsuarioService from '../services/usuarioService';
 import bcrypt from 'bcryptjs';
 
 class Authenticate {

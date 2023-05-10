@@ -52,4 +52,10 @@ Instituicao.hasMany(AtestadoComparecimento, {
     foreignKey:'instituicaoId',
 });
 
+Usuario.belongsTo(Instituicao, { 
+    foreignKey: 'instituicaoId',
+    as: 'instituicao' 
+});
+
+
 export default Instituicao;

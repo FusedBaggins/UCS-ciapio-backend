@@ -97,7 +97,7 @@ const aclRules = [
     group: "deslogado",
     permissions: [
       {
-        resource: "/login",
+        resource: "/login/*",
         methods: "*",
         action: "allow",
         name: "Login",
@@ -108,6 +108,17 @@ const aclRules = [
         methods: ["POST"],
         action: "allow",
         name: "Criar usuário",
+        visible: false,
+      },
+    ],
+  },
+  {
+    group: "administrador",
+    permissions: [
+      {
+        resource: "*",
+        methods: "*",
+        action: "allow",
         visible: false,
       },
     ],

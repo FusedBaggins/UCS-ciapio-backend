@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import Usuario from "./usuario.model";
-import UsuarioService from "../../helpers/services/usuarioService";
-import PerfilPermissaoUsuarioService from "../../helpers/services/perfilPermissaoService";
+import UsuarioService from "../../services/usuarioService";
+import PerfilPermissaoUsuarioService from "../../services/perfilPermissaoService";
+import { AuthenticatedRequest } from '../../../';
+import UsuarioValidate from "../../helpers/validations/usuarioValidate";
+
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -17,27 +20,13 @@ export default {
 
         return res.status(404).json({});
     },
-
-    /**
-     * @param {string} nome
-     * @param {string} senha
-     * @param {string} usuario 
-     * @param {object} perfisPermissao
-    */
     async save(req: Request, res: Response): Promise<any> {
         try {
-            const usuario = await UsuarioService.save(req.body);
-            const permissoes = req.body.perfisPermissao;
-            if (Array.isArray(permissoes)) {
-                for (const item of permissoes) {
-                    await PerfilPermissaoUsuarioService.save(item);
-                }
-            }
-
-            req.login(usuario, () => {
-                return res.status(200).json({
-                    id: usuario.id,
-                });
+            await UsuarioValidate.validarUsuario(req as AuthenticatedRequest);
+            const { usuario } = await UsuarioService.salvarComDependencias(req.body);
+          
+            return res.status(200).json({
+                id: usuario.id,
             });
         }
         catch (error) {
@@ -46,3 +35,4 @@ export default {
         }
     },
 }
+

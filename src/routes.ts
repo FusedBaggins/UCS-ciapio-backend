@@ -9,7 +9,7 @@ import instituicaoController from "./entidades/instituicao/instituicao.controlle
 import perguntaController from "./entidades/prestador/entidades/pergunta/pergunta.controller";
 import respostaController from "./entidades/prestador/entidades/resposta/resposta.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
-import MenuService from "./helpers/services/menuService";
+import MenuService from "./services/menuService";
 import passport from "passport";
 import { Response, Request } from "express";
 import { AuthenticatedRequest } from "..";
@@ -35,6 +35,7 @@ routes.get('/processo/:id', processoController.detail);
 
 routes.get('/prestador/', prestadorController.list);
 routes.get('/prestador/:id', prestadorController.detail);
+routes.post('/prestador/', prestadorController.save);
 
 routes.get('/ciap/', instituicaoController.listCIAP);
 routes.get('/ciap/:id', instituicaoController.detail);
