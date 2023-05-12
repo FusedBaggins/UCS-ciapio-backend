@@ -79,49 +79,50 @@ Prestador.init(
     }
 );
 
-Processo.belongsTo(Prestador, {
+Prestador.hasMany(Processo, {
     foreignKey: 'prestadorId',
-    as: 'prestador'
+    as: 'processos'
 });
 
-FichaMedica.belongsTo(Prestador, {
+Prestador.hasOne(FichaMedica, {
     foreignKey: 'prestadorId',
-    as: 'prestador'
+    as: 'fichaMedica'
 });
 
 Prestador.hasMany(Visita, {
-    foreignKey:'prestadorId',
-    as: 'prestador'
-});
-
-Trabalho.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
-    as: 'prestador'
+    as: 'visitas'
 });
 
-AlternativaPenal.belongsTo(Prestador, {
-    foreignKey: 'prestadorId',
-    as: 'prestador'
+Prestador.hasMany(Trabalho, { 
+    foreignKey: 'prestadorId', 
+    as: 'trabalhos' 
 });
 
-Beneficio.belongsTo(Prestador, {
-    foreignKey: 'prestadorId',
-    as: 'prestador'
+Prestador.hasMany(AlternativaPenal, { 
+    foreignKey: 'prestadorId', 
+    as: 'alternativasPenais' 
 });
 
-Curso.belongsTo(Prestador, {
-    foreignKey: 'prestadorId',
-    as: 'prestador'
+
+Prestador.hasMany(Beneficio, { 
+    foreignKey: 'prestadorId', 
+    as: 'beneficios' 
 });
 
-Habilidade.belongsTo(Prestador, {
-    foreignKey: 'prestaodorId',
-    as: 'prestador'
+Prestador.hasMany(Curso, { 
+    foreignKey: 'prestadorId', 
+    as: 'cursos' 
 });
 
-Familiar.belongsTo(Prestador, {
-    foreignKey: 'prestadorId',
-    as: 'prestador'
+Prestador.hasMany(Habilidade, { 
+    foreignKey: 'prestadorId', 
+    as: 'habilidades' 
+});
+
+Prestador.hasMany(Familiar, { 
+    foreignKey: 'prestadorId', 
+    as: 'familiares' 
 });
 
 Prestador.belongsTo(Usuario, {

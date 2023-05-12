@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Prestador from "./prestador.model";
 import PrestadorService from "../../services/prestadorService";
-import EnderecoService from "../../services/enderecoService";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -11,7 +10,19 @@ export default {
     },
 
     async detail(req: Request, res: Response): Promise<any> {
-        let entidade: Prestador | null = await Prestador.findByPk(req.params.id);
+        let entidade: Prestador | null = await Prestador.findByPk(req.params.id, {
+            include: [
+                'habilidades',
+                'familiares',
+                'cursos',
+                'beneficios',
+                'alternativasPenais',
+                'trabalhos',
+                'visitas',
+                'fichaMedica',
+                'processos',
+            ],
+        });
         if (entidade)
             return res.status(200).json(entidade);
 
