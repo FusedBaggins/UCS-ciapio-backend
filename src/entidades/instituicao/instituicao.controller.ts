@@ -35,7 +35,11 @@ export default {
     },
 
     async detail(req: Request, res: Response): Promise<any> {
-        let entidade: Instituicao | null = await Instituicao.findByPk(req.params.id);
+        let entidade: Instituicao | null = await Instituicao.findByPk(req.params.id, {
+            include: [
+                'endereco',
+            ],
+        });
         if (entidade)
             return res.status(200).json(entidade);
 
@@ -43,7 +47,7 @@ export default {
     },
     async save(req: Request, res: Response): Promise<any> {
         try {
-            const entidade = await InstituicaoService.save(req.body);
+            const { entidade } = await InstituicaoService.salvarComDependencias(req.body);
             return res.status(200).json({ id: entidade?.id });
         }
         catch (error) {

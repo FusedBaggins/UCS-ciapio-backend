@@ -41,7 +41,7 @@ routes.get('/ciap/', instituicaoController.listCIAP);
 routes.get('/ciap/:id', instituicaoController.detail);
 routes.post('/ciap/', instituicaoController.save);
 
-routes.get('/instituicao-parceira/', instituicaoController.listCIAP);
+routes.get('/instituicao-parceira/', instituicaoController.listInstituicaoParceira);
 routes.get('/instituicao-parceira/:id', instituicaoController.detail);
 routes.post('/instituicao-parceira/', instituicaoController.save);
 

@@ -1,3 +1,4 @@
+import Habilidade from "../entidades/prestador/entidades/habilidade/habilidade.model";
 import Prestador from "../entidades/prestador/prestador.model";
 import alternativaPenalService from "./alternativaPenalService";
 import BaseService from "./baseService";
@@ -20,86 +21,85 @@ class PrestadorService extends BaseService<Prestador> {
     let endereco = null;
     if (campos.endereco) {
       endereco = await enderecoService.save(campos.endereco);
-      campos.endereco = endereco.id;
+      campos.enderecoId = endereco.id;
     }
 
     const entidade = await super.save(campos) as Prestador;
-    
-    await super.childListSave(
-      campos.habilidades, 
-      entidade.id, 
-      "prestadorId", 
-      (item: any) => {
-        habilidadeService.save(item)
-      }
-    );
 
-    await super.childListSave(
-      campos.familiares, 
+    const habilidades = await super.childListSave(
+      campos.habilidades,
       entidade.id,
-      "prestadorId", 
-      (item: any) => {
-        familiarService.save(item)
-      }
+      "prestadorId",
+      (item: any) => habilidadeService.save(item)
     );
 
-    await super.childListSave(
-      campos.cursos, 
+    const familiares = await super.childListSave(
+      campos.familiares,
       entidade.id,
-      "prestadorId", 
-      (item: any) => {
-        cursoService.save(item)
-      }
+      "prestadorId",
+      (item: any) => familiarService.save(item)
     );
 
-    await super.childListSave(
-      campos.beneficios, 
+    const cursos = await super.childListSave(
+      campos.cursos,
       entidade.id,
-      "prestadorId", 
-      (item: any) => {
-        beneficioService.save(item)
-      }
+      "prestadorId",
+      (item: any) => cursoService.save(item)
     );
 
-    await super.childListSave(
-      campos.alternativasPenais, 
+    const beneficios = await super.childListSave(
+      campos.beneficios,
       entidade.id,
-      "prestadorId", 
-      (item: any) => {
-        alternativaPenalService.save(item)
-      }
+      "prestadorId",
+      (item: any) => beneficioService.save(item)
+
     );
 
-    await super.childListSave(
-      campos.trabalhos, 
+    const alternativasPenais = await super.childListSave(
+      campos.alternativasPenais,
       entidade.id,
-      "prestadorId", 
-      (item: any) => {
-        trabalhoService.save(item)
-      }
+      "prestadorId",
+      (item: any) => alternativaPenalService.save(item)
     );
 
-    await super.childListSave(
-      campos.visitas, 
+    const trabalhos = await super.childListSave(
+      campos.trabalhos,
       entidade.id,
-      "prestadorId", 
-      (item: any) => {
-        visitaService.save(item)
-      }
+      "prestadorId",
+      (item: any) => trabalhoService.save(item)
+
     );
 
-    await super.childListSave(
-      campos.processos, 
+    const visitas = await super.childListSave(
+      campos.visitas,
       entidade.id,
-      "prestadorId", 
-      (item: any) => {
-        processoService.save(item)
-      }
-    );
-    
-    await fichaMedicaService.save(campos.fichaMedica);
+      "prestadorId",
+      (item: any) => visitaService.save(item)
 
-    return { entidade, endereco };
+    );
+
+    const processos = await super.childListSave(
+      campos.processos,
+      entidade.id,
+      "prestadorId",
+      (item: any) => processoService.save(item)
+    );
+
+    if (campos.fichaMedica)
+      await fichaMedicaService.save(campos.fichaMedica);
+
+    return {
+      entidade,
+      endereco,
+      habilidades,
+      familiares,
+      trabalhos,
+      cursos,
+      visitas,
+      processos,
+      alternativasPenais,
+      beneficios
+    };
   }
 }
 

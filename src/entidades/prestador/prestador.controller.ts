@@ -21,6 +21,7 @@ export default {
                 'visitas',
                 'fichaMedica',
                 'processos',
+                'endereco',
             ],
         });
         if (entidade)

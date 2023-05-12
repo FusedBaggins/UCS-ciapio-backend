@@ -24,13 +24,16 @@ class BaseService<T extends Model> {
     return entidade;
   }
 
-  static async childListSave<T extends Model>(this: new () => BaseService<T>, list: any | null, idParent: number, keyParent: string, callback: Function) {
+  static async childListSave<T extends Model>(list: any | null, idParent: number, keyParent: string, callback: (item: T) => Promise<T>) {
+    const listInserts: T[] = [];    
     if (Array.isArray(list)) {
       for (const item of list) {
         item[keyParent] = idParent;
-        await callback(item);
+        listInserts.push(await callback(item as T));
       }
     }
+
+    return listInserts;
   }
 }
 
