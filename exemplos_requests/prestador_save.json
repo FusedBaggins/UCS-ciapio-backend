@@ -1,0 +1,64 @@
+{
+	"nome": "teste",
+	"cpf":"03612222231",
+	"nome_mae": "dona nela",
+	"dt_nascimento": "05/05/2022",
+	"estado_civil": 1,
+	"etnia": 1,
+	"escolaridade": 1,
+	"renda_familiar": 3500,
+	"telefone1": "999243818",
+	"religiao": "shrek",
+	"usuarioId": 2,
+	"endereco": {
+		"cep": "8",
+		"rua": "Exemplo",
+		"numero": 377,
+		"bairro": "Lourdes",
+		"complemento": "Pra que",
+		"cidade": 1,
+		"id": 17
+	},
+	"habilidades":[
+		{
+			"descricao": "jorge",
+			"observacao": "f", 
+			"id": 1
+		}
+	],
+	"familiares":[
+		{
+			"nome": "jorge",
+			"parentesco": "pai", 
+			"idade": "30", 
+			"profissao": "trabalhador", 
+			"observacao": "sem observacoes", 
+			"telefone": "999243818",
+			"id": 1
+		}
+	],
+	"fichaMedica": {
+		"nome": "Diabético",
+		"usoDrogas": [
+			{
+				"observacao": "Usuário de jogos eletronicos",
+				"frequencia": 2, 
+				"droga": 1
+			}
+ 		],
+		"deficiencias":[
+		{
+			"id": 1,
+			"idDeficiencia": 2
+		}
+		]
+	},
+	"respostas":[
+		{
+		"perguntaId": 1,
+		"id": 1,
+		"descricao": "jorge"
+		}
+	],
+	"id": 3
+}
