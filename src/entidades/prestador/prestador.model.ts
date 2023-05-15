@@ -86,7 +86,7 @@ Prestador.hasMany(Processo, {
 
 Prestador.hasOne(FichaMedica, {
     foreignKey: 'prestadorId',
-    as: 'fichaMedica'
+    as: 'prestador'
 });
 
 Prestador.belongsTo(Endereco, { 
