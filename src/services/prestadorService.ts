@@ -1,14 +1,19 @@
+import Deficiencia from "../entidades/prestador/entidades/deficiencia/deficiencia.model";
 import Habilidade from "../entidades/prestador/entidades/habilidade/habilidade.model";
 import Prestador from "../entidades/prestador/prestador.model";
+import FichaMedicaView from "../interfaces/FichaMedicaView";
 import alternativaPenalService from "./alternativaPenalService";
 import BaseService from "./baseService";
 import beneficioService from "./beneficioService";
 import cursoService from "./cursoService";
+import deficienciaService from "./deficienciaService";
+import drogaService from "./drogaService";
 import enderecoService from "./enderecoService";
 import familiarService from "./familiarService";
 import fichaMedicaService from "./fichaMedicaService";
 import habilidadeService from "./habilidadeService";
 import processoService from "./processoService";
+import respostaService from "./respostaService";
 import trabalhoService from "./trabalhoService";
 import visitaService from "./visitaService";
 
@@ -85,8 +90,44 @@ class PrestadorService extends BaseService<Prestador> {
       (item: any) => processoService.save(item)
     );
 
-    if (campos.fichaMedica)
-      await fichaMedicaService.save(campos.fichaMedica);
+
+    const respostas = await super.childListSave(
+      campos.respostas,
+      entidade.id,
+      "prestadorId",
+      (item: any) => respostaService.save(item)
+    );
+
+    let ficha: FichaMedicaView = {
+      deficiencias: [],
+      usoDrogas: [],
+      fichaMedica: {}
+    };
+
+    if (campos.fichaMedica) {
+      ficha.fichaMedica = await fichaMedicaService.save(campos.fichaMedica);
+
+      if (ficha.fichaMedica) {
+
+        if (campos.fichaMedica.deficiencias) {
+          ficha.deficiencias = await super.childListSave(
+            campos.fichaMedica.deficiencias,
+            ficha.fichaMedica.id,
+            "fichaMedicaId",
+            (item: any) => deficienciaService.save(item)
+          );
+        }
+
+        if(campos.fichaMedica.usoDrogas){
+          ficha.usoDrogas = await super.childListSave(
+            campos.fichaMedica.usoDrogas,
+            ficha.fichaMedica.id,
+            "fichaMedicaId",
+            (item: any) => drogaService.save(item)
+          );
+        }
+      }
+    } 
 
     return {
       entidade,
@@ -98,7 +139,9 @@ class PrestadorService extends BaseService<Prestador> {
       visitas,
       processos,
       alternativasPenais,
-      beneficios
+      beneficios,
+      respostas,
+      fichaMedica: ficha,
     };
   }
 }

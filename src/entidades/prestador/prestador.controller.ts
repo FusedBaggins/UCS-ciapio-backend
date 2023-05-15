@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import Prestador from "./prestador.model";
 import PrestadorService from "../../services/prestadorService";
+import Pergunta from "./entidades/pergunta/pergunta.model";
+import Droga from "./entidades/droga/droga.model";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -24,8 +26,17 @@ export default {
                 'endereco',
             ],
         });
+
+        let perguntas = await Pergunta.findAll({
+            where: {
+                ativo: true,
+            }
+        });
+
+        let drogas = await Droga.findAll();
+
         if (entidade)
-            return res.status(200).json(entidade);
+            return res.status(200).json({ entidade, perguntas, drogas });
 
         return res.status(404).json({});
     },

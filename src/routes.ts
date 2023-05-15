@@ -28,6 +28,8 @@ routes.get('/vara/', varaController.list);
 routes.get('/vara/:id', varaController.detail);
 routes.get('/pergunta/', perguntaController.list);
 routes.get('/pergunta/:id', perguntaController.detail);
+routes.post('/pergunta/', perguntaController.save);
+
 routes.get('/resposta/', respostaController.list);
 routes.get('/resposta/:id', respostaController.detail);
 routes.get('/processo/', processoController.list);

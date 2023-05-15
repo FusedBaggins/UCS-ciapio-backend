@@ -5,12 +5,12 @@ import database from '../../../../database/database';
 
 class Deficiencia extends Model {
     id!: number;
-    nome!: string;
+    idDeficiencia!: number;
 }
 
 Deficiencia.init(
     {
-        nome: { type: Sequelize.STRING },
+        idDeficiencia: { type: Sequelize.INTEGER },
     },
     {
         sequelize: database.connection,
