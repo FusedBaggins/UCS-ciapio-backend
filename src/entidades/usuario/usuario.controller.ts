@@ -9,12 +9,16 @@ import UsuarioValidate from "../../helpers/validations/usuarioValidate";
 export default {
     async list(req: Request, res: Response): Promise<any> {
 
-        let entidades: Usuario[] = await Usuario.findAll();
+        let entidades: Usuario[] = await Usuario.findAll({
+            attributes: { exclude: ['senha', 'hash'] }
+        });
         return res.status(200).json(entidades);
     },
 
     async detail(req: Request, res: Response): Promise<any> {
-        let entidade: Usuario | null = await Usuario.findByPk(req.params.id);
+        let entidade: Usuario | null = await Usuario.findByPk(req.params.id, {
+            attributes: { exclude: ['senha', 'hash'] }
+        });
         if (entidade)
             return res.status(200).json(entidade);
 
@@ -24,7 +28,7 @@ export default {
         try {
             await UsuarioValidate.validarUsuario(req as AuthenticatedRequest);
             const { usuario } = await UsuarioService.salvarComDependencias(req.body);
-          
+
             return res.status(200).json({
                 id: usuario.id,
             });
