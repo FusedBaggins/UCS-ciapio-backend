@@ -39,7 +39,7 @@ const aclRules = [
       },
       {
         resource: "/usuario",
-        methods: ["POST"],
+        methods: ["POST", "GET"],
         action: "allow",
         name: "Criar usuário",
         visible: false,

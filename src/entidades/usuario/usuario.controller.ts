@@ -1,16 +1,37 @@
 import { Request, Response } from "express";
 import Usuario from "./usuario.model";
 import UsuarioService from "../../services/usuarioService";
-import PerfilPermissaoUsuarioService from "../../services/perfilPermissaoService";
 import { AuthenticatedRequest } from '../../../';
 import UsuarioValidate from "../../helpers/validations/usuarioValidate";
+import { Op } from "sequelize";
 
+const _getListFilters = (req: Request) =>
+({
+    ...(req.query.id && { id: req.query.id }),
+    ...(req.query.nome && {
+        [Op.or]: [
+            {
+                nome: {
+                    [Op.iLike]: `%${req.query.nome}%`
+                }
+            },
+            {
+                usuario: {
+                    [Op.iLike]: `%${req.query.nome}%`
+                }
+            }
+        ]
+    })
+});
 
 export default {
-    async list(req: Request, res: Response): Promise<any> {
 
+    async list(req: Request, res: Response): Promise<any> {
         let entidades: Usuario[] = await Usuario.findAll({
-            attributes: { exclude: ['senha', 'hash'] }
+            attributes: { exclude: ['senha', 'hash'] },
+            where: {
+                ..._getListFilters(req),
+            },
         });
         return res.status(200).json(entidades);
     },
