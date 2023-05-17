@@ -19,10 +19,8 @@ export default {
     async save(req: Request, res: Response): Promise<any> {
         try {
             const entidade = await PerguntaService.save(req.body);
-            req.login(entidade, () => {
-                return res.status(200).json({
-                    id: entidade.id,
-                });
+            return res.status(200).json({
+                id: entidade.id,
             });
         }
         catch (error) {

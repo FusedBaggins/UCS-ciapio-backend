@@ -45,6 +45,13 @@ const aclRules = [
         visible: false,
       },
       {
+        resource: "/pergunta/*",
+        methods: ["POST", "GET"],
+        action: "allow",
+        name: "Perguntas",
+        visible: true,
+      },
+      {
         resource: "/prestador/*",
         methods: ["POST", "GET", "PUT"],
         action: "allow",

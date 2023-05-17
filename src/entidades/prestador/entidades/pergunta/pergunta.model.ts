@@ -7,7 +7,6 @@ export class Pergunta extends Model {
     id!: number;
     pergunta!: string;
     ativo!: boolean;
-
 }
 
 Pergunta.init(

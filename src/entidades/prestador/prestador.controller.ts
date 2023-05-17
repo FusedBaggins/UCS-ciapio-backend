@@ -8,8 +8,8 @@ import { Op } from "sequelize";
 const _getListFilters = (req: Request) =>
 ({
     ...(req.query.id && { id: req.query.id }),
-    ...(req.query.nome && { 
-        nome: { [Op.iLike]: `%${req.query.nome}%` } 
+    ...(req.query.nome && {
+        nome: { [Op.iLike]: `%${req.query.nome}%` }
     }),
 });
 export default {
@@ -55,10 +55,8 @@ export default {
     async save(req: Request, res: Response): Promise<any> {
         try {
             const { entidade } = await PrestadorService.salvarComDependencias(req.body);
-            req.login(entidade, () => {
-                return res.status(200).json({
-                    id: entidade.id,
-                });
+            return res.status(200).json({
+                id: entidade.id,
             });
         }
         catch (error) {

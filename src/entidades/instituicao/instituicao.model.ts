@@ -5,7 +5,7 @@ import Endereco from '../endereco/endereco.model';
 import Usuario from '../usuario/usuario.model';
 import Visita from '../visita/visita.model';
 import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
-
+import Pergunta from '../prestador/entidades/pergunta/pergunta.model';
 
 class Instituicao extends Model {
     id!: number;
@@ -53,6 +53,11 @@ Instituicao.hasMany(AtestadoComparecimento, {
 });
 
 Usuario.belongsTo(Instituicao, { 
+    foreignKey: 'instituicaoId',
+    as: 'instituicao' 
+});
+
+Pergunta.belongsTo(Instituicao, { 
     foreignKey: 'instituicaoId',
     as: 'instituicao' 
 });
