@@ -28,7 +28,8 @@ routes.get('/vara/', varaController.list);
 routes.get('/vara/:id', varaController.detail);
 routes.get('/pergunta/', perguntaController.list);
 routes.get('/pergunta/:id', perguntaController.detail);
-routes.post('/pergunta/', perguntaController.save);
+routes.post('/pergunta/', (req: Request, res: Response) =>
+  perguntaController.save(req as AuthenticatedRequest, res));
 
 routes.get('/resposta/', respostaController.list);
 routes.get('/resposta/:id', respostaController.detail);
@@ -36,7 +37,8 @@ routes.get('/processo/', processoController.list);
 routes.get('/processo/:id', processoController.detail);
 
 routes.get('/prestador/', prestadorController.list);
-routes.get('/prestador/:id', prestadorController.detail);
+routes.get('/prestador/:id', (req: Request, res: Response) =>
+  prestadorController.detail(req as AuthenticatedRequest, res));
 routes.post('/prestador/', prestadorController.save);
 
 routes.get('/ciap/', instituicaoController.listCIAP);
@@ -66,7 +68,7 @@ routes.post('/unauthorized/', (req: Request, res: Response) => {
 routes.post(
   "/login",
   passport.authenticate("local"),
-  (req: Request, res: Response) =>  res.status(200).send()
+  (req: Request, res: Response) => res.status(200).send()
 
 );
 

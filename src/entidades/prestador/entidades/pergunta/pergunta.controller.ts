@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Pergunta from "./pergunta.model";
 import PerguntaService from "../../../../services/perguntaService";
+import { AuthenticatedRequest } from "../../../../..";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -16,9 +17,13 @@ export default {
 
         return res.status(404).json({});
     },
-    async save(req: Request, res: Response): Promise<any> {
+    async save(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {
-            const entidade = await PerguntaService.save(req.body);
+            const objSave = {
+                ...req.body,
+                instituicaoId: req?.user?.user?.instituicaoId,
+            }
+            const entidade = await PerguntaService.save(objSave);
             return res.status(200).json({
                 id: entidade.id,
             });

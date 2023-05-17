@@ -4,6 +4,7 @@ import PrestadorService from "../../services/prestadorService";
 import Pergunta from "./entidades/pergunta/pergunta.model";
 import Droga from "./entidades/droga/droga.model";
 import { Op } from "sequelize";
+import { AuthenticatedRequest } from "../../..";
 
 const _getListFilters = (req: Request) =>
 ({
@@ -23,7 +24,7 @@ export default {
         return res.status(200).json(entidades);
     },
 
-    async detail(req: Request, res: Response): Promise<any> {
+    async detail(req: AuthenticatedRequest, res: Response): Promise<any> {
         let entidade: Prestador | null = await Prestador.findByPk(req.params.id, {
             include: [
                 'habilidades',
@@ -42,6 +43,9 @@ export default {
         let perguntas = await Pergunta.findAll({
             where: {
                 ativo: true,
+                ...(req?.user?.user?.instituicaoId &&
+                    { instituicaoId: req.user.user.instituicaoId }
+                ),
             }
         });
 
