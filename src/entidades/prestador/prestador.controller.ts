@@ -3,11 +3,23 @@ import Prestador from "./prestador.model";
 import PrestadorService from "../../services/prestadorService";
 import Pergunta from "./entidades/pergunta/pergunta.model";
 import Droga from "./entidades/droga/droga.model";
+import { Op } from "sequelize";
 
+const _getListFilters = (req: Request) =>
+({
+    ...(req.query.id && { id: req.query.id }),
+    ...(req.query.nome && { 
+        nome: { [Op.iLike]: `%${req.query.nome}%` } 
+    }),
+});
 export default {
     async list(req: Request, res: Response): Promise<any> {
 
-        let entidades: Prestador[] = await Prestador.findAll();
+        let entidades: Prestador[] = await Prestador.findAll({
+            where: {
+                ..._getListFilters(req),
+            },
+        });
         return res.status(200).json(entidades);
     },
 
