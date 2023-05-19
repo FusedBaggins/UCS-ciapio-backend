@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Pergunta from "./pergunta.model";
 import PerguntaService from "../../../../services/perguntaService";
 import { AuthenticatedRequest } from "../../../../..";
+import EntidadeValidate from "../../../../helpers/validations/entidadeValidate";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -10,12 +11,25 @@ export default {
         return res.status(200).json(entidades);
     },
 
-    async detail(req: Request, res: Response): Promise<any> {
-        let entidade: Pergunta | null = await Pergunta.findByPk(req.params.id);
-        if (entidade)
-            return res.status(200).json(entidade);
+    async detail(req: AuthenticatedRequest, res: Response): Promise<any> {
+        try {
+            let entidade = await Pergunta.findByPk(req.params.id, {
+                include: [
+                    'instituicao'
+                ]
+            });
 
-        return res.status(404).json({});
+            if (entidade){
+                await EntidadeValidate.validarEntidadeDetail(entidade, req);
+                delete entidade.instituicao;
+                return res.status(200).json(entidade);
+            }
+            return res.status(404).json({});
+        }
+        catch (error) {
+            console.error(error);
+            return res.status(400).json(error);
+        }
     },
     async save(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {

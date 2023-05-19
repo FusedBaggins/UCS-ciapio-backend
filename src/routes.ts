@@ -14,44 +14,83 @@ import passport from "passport";
 import { Response, Request } from "express";
 import { AuthenticatedRequest } from "..";
 import prestadorController from "./entidades/prestador/prestador.controller";
+import visitaController from "./entidades/visita/visita.controller";
 
 const routes = Router();
 
 routes.get('/unidade-federativa/', unidadeFederativaController.list);
+
 routes.get('/unidade-federativa/:id', unidadeFederativaController.detail);
+
 routes.get('/cidade/', cidadeControler.list);
+
 routes.get('/cidade/:id', cidadeControler.detail);
+
 routes.get('/endereco/', enderecoController.list);
+
 routes.get('/endereco/:id', enderecoController.detail);
 
 routes.get('/vara/', varaController.list);
+
 routes.get('/vara/:id', varaController.detail);
+
 routes.get('/pergunta/', perguntaController.list);
-routes.get('/pergunta/:id', perguntaController.detail);
+
+routes.get('/pergunta/:id', (req: Request, res: Response) =>
+  perguntaController.detail(req as AuthenticatedRequest, res));
+
 routes.post('/pergunta/', (req: Request, res: Response) =>
   perguntaController.save(req as AuthenticatedRequest, res));
 
 routes.get('/resposta/', respostaController.list);
+
 routes.get('/resposta/:id', respostaController.detail);
+
 routes.get('/processo/', processoController.list);
+
 routes.get('/processo/:id', processoController.detail);
 
-routes.get('/prestador/', prestadorController.list);
+routes.get('/prestador/', (req: Request, res: Response) =>
+  prestadorController.list(req as AuthenticatedRequest, res));
+
 routes.get('/prestador/:id', (req: Request, res: Response) =>
   prestadorController.detail(req as AuthenticatedRequest, res));
-routes.post('/prestador/', prestadorController.save);
+
+routes.post('/prestador/', (req: Request, res: Response) =>
+  prestadorController.save(req as AuthenticatedRequest, res));
 
 routes.get('/ciap/', instituicaoController.listCIAP);
-routes.get('/ciap/:id', instituicaoController.detail);
-routes.post('/ciap/', instituicaoController.save);
 
-routes.get('/instituicao-parceira/', instituicaoController.listInstituicaoParceira);
-routes.get('/instituicao-parceira/:id', instituicaoController.detail);
-routes.post('/instituicao-parceira/', instituicaoController.save);
+routes.get('/ciap/:id', (req: Request, res: Response) =>
+  instituicaoController.detail(req as AuthenticatedRequest, res));
+  
+routes.post('/ciap/', (req: Request, res: Response) =>
+  instituicaoController.save(req as AuthenticatedRequest, res));
 
-routes.get('/usuario/', usuarioController.list);
+routes.get('/instituicao-parceira/', (req: Request, res: Response) =>
+  instituicaoController.listInstituicaoParceira(req as AuthenticatedRequest, res));
+
+routes.get('/instituicao-parceira/:id', (req: Request, res: Response) =>
+  instituicaoController.detail(req as AuthenticatedRequest, res));
+
+routes.post('/instituicao-parceira/', (req: Request, res: Response) =>
+  instituicaoController.save(req as AuthenticatedRequest, res));
+
+routes.get('/usuario/', (req: Request, res: Response) =>
+  usuarioController.list(req as AuthenticatedRequest, res));
+
 routes.get('/usuario/:id', usuarioController.detail);
-routes.post('/usuario/', usuarioController.save);
+
+routes.post('/usuario/', (req: Request, res: Response) =>
+  usuarioController.save(req as AuthenticatedRequest, res));
+
+routes.get('/visita/', (req: Request, res: Response) =>
+  visitaController.list(req as AuthenticatedRequest, res));
+
+routes.get('/visita/:id', (req: Request, res: Response) =>
+  visitaController.detail(req as AuthenticatedRequest, res));
+
+routes.post('/visita/', visitaController.save);
 
 routes.get('/menu/', (req: Request, res: Response) =>
   MenuService.getMenu(req as AuthenticatedRequest, res));

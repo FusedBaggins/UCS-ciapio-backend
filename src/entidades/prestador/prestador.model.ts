@@ -15,6 +15,7 @@ import Familiar from './entidades/familiar/familiar.model';
 import FichaMedica from './entidades/ficha-medica/ficha-medica.model';
 import Habilidade from './entidades/habilidade/habilidade.model';
 import Trabalho from './entidades/trabalho/trabalho.model';
+import Instituicao from '../instituicao/instituicao.model';
 
 
 export class Prestador extends Model {
@@ -33,6 +34,7 @@ export class Prestador extends Model {
     image?: File;
     endereco!: Endereco;
     usuario!: Usuario;
+    instituicao!: Instituicao;
 }
 
 Prestador.init(
@@ -136,4 +138,9 @@ Prestador.belongsTo(Usuario, {
     as: 'usuario'
 });
 
+
+Prestador.belongsTo(Instituicao, {
+    foreignKey: 'instituicaoId',
+    as: 'instituicao'
+});
 export default Prestador;

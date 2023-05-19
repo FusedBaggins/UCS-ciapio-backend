@@ -21,12 +21,14 @@ import FichaMedica from "../../entidades/prestador/entidades/ficha-medica/ficha-
 import AgendamentoPrestacao from "../../entidades/agendamento-prestacao/agendamento-prestacao.model";
 import PerfilPermissaoUsuario from "../../entidades/perfil-permissao-usuario/perfil-permissao-usuario.model";
 import AlternativaPenal from "../../entidades/prestador/entidades/alternativa-penal/alternativa-penal.model";
+import InstituicaoVinculo from "../../entidades/instituicao/Instituicao-vinculo.model";
 
 export const entidades: any[] = [
     UnidadeFederativa,
     Cidade,
     Endereco,
     Instituicao,
+    InstituicaoVinculo,
     Usuario,
     Vara,
     Pergunta,

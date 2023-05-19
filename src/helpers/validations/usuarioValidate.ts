@@ -3,7 +3,7 @@ import Perfil from "../../enums/perfil";
 import UsuarioService from "../../services/usuarioService";
 
 class UsuarioValidate {
-    static async validaInstituicao(req: AuthenticatedRequest): Promise<any>{
+    static async validarInstituicao(req: AuthenticatedRequest): Promise<any>{
         if (req.body.id) {
             const usuario = await UsuarioService.getById(req.body.id);
 
@@ -19,7 +19,7 @@ class UsuarioValidate {
     }
 
     static async validarUsuario(req: AuthenticatedRequest): Promise<any>{
-        await this.validaInstituicao(req);
+        await this.validarInstituicao(req);
     }
 }
 

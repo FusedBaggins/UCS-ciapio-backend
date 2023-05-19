@@ -18,7 +18,7 @@ class Instituicao extends Model {
     observacao!: string;
     data_credenciamento!: Date;
     data_descredenciamento!: Date;
-    endereco!:Endereco;
+    endereco!: Endereco;
 }
 
 Instituicao.init(
@@ -41,26 +41,25 @@ Instituicao.init(
 );
 
 Usuario.belongsTo(Instituicao, {
-    foreignKey:'instituicaoId',
+    foreignKey: 'instituicaoId',
 });
 
 Instituicao.hasOne(Visita, {
-    foreignKey:'instituicaoId',
+    foreignKey: 'instituicaoId',
 });
 
 Instituicao.hasMany(AtestadoComparecimento, {
-    foreignKey:'instituicaoId',
-});
-
-Usuario.belongsTo(Instituicao, { 
     foreignKey: 'instituicaoId',
-    as: 'instituicao' 
 });
 
-Pergunta.belongsTo(Instituicao, { 
+Usuario.belongsTo(Instituicao, {
     foreignKey: 'instituicaoId',
-    as: 'instituicao' 
+    as: 'instituicao'
 });
 
+Pergunta.belongsTo(Instituicao, {
+    foreignKey: 'instituicaoId',
+    as: 'instituicao'
+});
 
 export default Instituicao;

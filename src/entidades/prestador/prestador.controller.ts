@@ -3,8 +3,10 @@ import Prestador from "./prestador.model";
 import PrestadorService from "../../services/prestadorService";
 import Pergunta from "./entidades/pergunta/pergunta.model";
 import Droga from "./entidades/droga/droga.model";
-import { Op } from "sequelize";
+import { Op, Sequelize } from "sequelize";
 import { AuthenticatedRequest } from "../../..";
+import Instituicao from "../instituicao/instituicao.model";
+import Usuario from "../usuario/usuario.model";
 
 const _getListFilters = (req: Request) =>
 ({
@@ -14,12 +16,13 @@ const _getListFilters = (req: Request) =>
     }),
 });
 export default {
-    async list(req: Request, res: Response): Promise<any> {
+    async list(req: AuthenticatedRequest, res: Response): Promise<any> {
 
         let entidades: Prestador[] = await Prestador.findAll({
             where: {
                 ..._getListFilters(req),
-            },
+                instituicaoId: req?.user?.user.instituicaoId,
+            }
         });
         return res.status(200).json(entidades);
     },
@@ -56,8 +59,10 @@ export default {
 
         return res.status(404).json({});
     },
-    async save(req: Request, res: Response): Promise<any> {
+    async save(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {
+            req.body.usuarioId = req?.user?.user.id;
+            req.body.instituicaoId = req?.user?.user?.instituicaoId;
             const { entidade } = await PrestadorService.salvarComDependencias(req.body);
             return res.status(200).json({
                 id: entidade.id,

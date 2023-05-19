@@ -26,11 +26,12 @@ const _getListFilters = (req: Request) =>
 
 export default {
 
-    async list(req: Request, res: Response): Promise<any> {
+    async list(req: AuthenticatedRequest, res: Response): Promise<any> {
         let entidades: Usuario[] = await Usuario.findAll({
             attributes: { exclude: ['senha', 'hash'] },
             where: {
                 ..._getListFilters(req),
+                instituicaoId: req?.user?.user.instituicaoId,
             },
         });
         return res.status(200).json(entidades);
@@ -45,9 +46,9 @@ export default {
 
         return res.status(404).json({});
     },
-    async save(req: Request, res: Response): Promise<any> {
+    async save(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {
-            await UsuarioValidate.validarUsuario(req as AuthenticatedRequest);
+            await UsuarioValidate.validarUsuario(req);
             const { usuario } = await UsuarioService.salvarComDependencias(req.body);
 
             return res.status(200).json({

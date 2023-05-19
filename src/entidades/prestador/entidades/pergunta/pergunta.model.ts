@@ -1,12 +1,14 @@
 import Sequelize, { Model } from 'sequelize';
 
 import database from '../../../../database/database';
+import Instituicao from '../../../instituicao/instituicao.model';
 
 
 export class Pergunta extends Model {
     id!: number;
     pergunta!: string;
     ativo!: boolean;
+    instituicao?: Instituicao;
 }
 
 Pergunta.init(
