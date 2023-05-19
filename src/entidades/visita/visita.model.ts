@@ -46,5 +46,15 @@ Visita.hasMany(AgendamentoPrestacao, {
 });
 
 
+// Visita.belongsTo(Instituicao, {
+//     foreignKey: 'instituicaoId',
+//     as: 'instituicao'
+// });
+
+
+// Visita.belongsTo(Prestador, {
+//     foreignKey: 'prestadorId',
+//     as: 'prestador'
+// });
 
 export default Visita;

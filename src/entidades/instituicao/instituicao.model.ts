@@ -44,7 +44,7 @@ Usuario.belongsTo(Instituicao, {
     foreignKey: 'instituicaoId',
 });
 
-Instituicao.hasOne(Visita, {
+Instituicao.hasMany(Visita, {
     foreignKey: 'instituicaoId',
 });
 
@@ -62,4 +62,8 @@ Pergunta.belongsTo(Instituicao, {
     as: 'instituicao'
 });
 
+Visita.belongsTo(Instituicao, {
+    foreignKey: 'instituicaoId',
+    as: 'instituicao',
+  });
 export default Instituicao;

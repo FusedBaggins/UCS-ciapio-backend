@@ -143,4 +143,10 @@ Prestador.belongsTo(Instituicao, {
     foreignKey: 'instituicaoId',
     as: 'instituicao'
 });
+
+
+Visita.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
+    as: 'prestador'
+});
 export default Prestador;

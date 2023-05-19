@@ -9,8 +9,11 @@ export default {
 
         let entidades: Visita[] = await Visita.findAll({
             where: {
-                '$instituicaoId$': req.user?.user.instituicaoId,
+                'instituicaoId': req.user?.user.instituicaoId,
             },
+            include: [
+                'prestador',
+            ],
         });
         return res.status(200).json(entidades);
     },
