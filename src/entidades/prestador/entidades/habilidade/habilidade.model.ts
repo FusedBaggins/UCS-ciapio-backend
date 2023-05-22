@@ -6,7 +6,7 @@ import database from '../../../../database/database';
 
 export class Habilidade extends Model {
     id!: number;
-    instituicao!: string;
+    descricao!: string;
     observacao!: string;
     prestador!: Prestador;
 }
