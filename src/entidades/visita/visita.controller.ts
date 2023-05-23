@@ -20,9 +20,13 @@ export default {
 
     async detail(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {
-            let entidade = await Visita.findByPk(req.params.id);
+            let entidade = await Visita.findByPk(req.params.id, {
+                include: [
+                    'instituicao'
+                ]
+            });
             if (entidade) {
-                EntidadeValidate.validarEntidadeDetail(entidade, req);
+                await EntidadeValidate.validarEntidadeDetail(entidade, req);
                 return res.status(200).json(entidade);
             }
             return res.status(404).json({});
