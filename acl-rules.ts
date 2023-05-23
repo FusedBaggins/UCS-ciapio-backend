@@ -31,13 +31,6 @@ const aclRules = [
         visible: false,
       },
       {
-        resource: "/instituicao-parceira/*",
-        methods: ["POST", "GET", "PUT"],
-        action: "allow",
-        name: "Instituição parceira",
-        visible: true,
-      },
-      {
         resource: "/usuario",
         methods: ["POST", "GET"],
         action: "allow",
@@ -80,7 +73,7 @@ const aclRules = [
         visible: true,
       },
       {
-        resource: "/instituicao-parceira/*",
+        resource: "/entidade-parceira/*",
         methods: ["POST", "GET"],
         action: "allow",
         name: "Entidade parceira",
