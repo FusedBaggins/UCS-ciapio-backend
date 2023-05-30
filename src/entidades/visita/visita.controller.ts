@@ -3,13 +3,14 @@ import Visita from "./visita.model";
 import { AuthenticatedRequest } from "../../..";
 import VisitaService from "../../services/visitaService";
 import EntidadeValidate from "../../helpers/validations/entidadeValidate";
+import VisitaValidate from "../../helpers/validations/visitaValidate";
 
 export default {
     async list(req: AuthenticatedRequest, res: Response): Promise<any> {
 
         let entidades: Visita[] = await Visita.findAll({
             where: {
-                'instituicaoId': req.user?.user.instituicaoId,
+                '$prestador.instituicaoId$': req.user?.user.instituicaoId,
             },
             include: [
                 'prestador',
@@ -22,11 +23,12 @@ export default {
         try {
             let entidade = await Visita.findByPk(req.params.id, {
                 include: [
-                    'instituicao'
+                    'instituicao',
+                    'prestador',
                 ]
             });
             if (entidade) {
-                await EntidadeValidate.validarEntidadeDetail(entidade, req);
+                await VisitaValidate.validarVisitaDetail(entidade, req);
                 return res.status(200).json(entidade);
             }
             return res.status(404).json({});
@@ -37,8 +39,11 @@ export default {
         }
     },
 
-    async save(req: Request, res: Response): Promise<any> {
+    async save(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {
+            if(req.body.status && req.body.status === '4'){
+                req.body.dataAceite = Date.now;
+            }
             const entidade = await VisitaService.save(req.body);
             return res.status(200).json({ id: entidade?.id });
         }

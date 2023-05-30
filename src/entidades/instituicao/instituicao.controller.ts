@@ -8,7 +8,6 @@ import InstituicaoValidate from "../../helpers/validations/instituicaoParceiraVa
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
-
         let entidades: Instituicao[] = await Instituicao.findAll();
         return res.status(200).json(entidades);
     },
@@ -61,6 +60,31 @@ export default {
             return res.status(400).json(error).send();
         }
     },
+
+    async listSelect(req: AuthenticatedRequest, res: Response): Promise<any> {
+        let entidade = await InstituicaoVinculo.findAll({
+            where: {
+                instituicaoPaiId: req.user?.user?.instituicaoId,
+            },
+            include: [
+                'instituicaoParceira',
+            ],
+            attributes: [],
+        });
+
+        if (entidade) {
+            const instituicoes = entidade.map((entidade) => ({
+                id: entidade['instituicaoParceira'].id,
+                label: entidade['instituicaoParceira'].nome,
+            }));
+
+            return res.status(200).json(
+                instituicoes
+            );
+        }
+        return res.status(404).json({});
+    },
+
     async save(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {
             const { entidade } = await InstituicaoService.salvarComDependencias(req.body, req.user?.user);

@@ -79,6 +79,20 @@ const aclRules = [
         name: "Entidade parceira",
         visible: true,
       },
+      {
+        resource: "/select/prestador",
+        methods: ["GET"],
+        action: "allow",
+        name: "Select de prestador",
+        visible: false,
+      },
+      {
+        resource: "/select/instituicao-parceira",
+        methods: ["GET"],
+        action: "allow",
+        name: "Select de instituição parceira",
+        visible: false,
+      },
     ]
   },
   {
