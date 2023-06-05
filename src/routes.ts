@@ -50,6 +50,12 @@ routes.get('/processo/', processoController.list);
 
 routes.get('/processo/:id', processoController.detail);
 
+routes.get('/select/prestador/', (req: Request, res: Response) =>
+  prestadorController.listSelect(req as AuthenticatedRequest, res));
+
+routes.get('/select/instituicao-parceira/', (req: Request, res: Response) =>
+  instituicaoController.listSelect(req as AuthenticatedRequest, res));
+
 routes.get('/prestador/', (req: Request, res: Response) =>
   prestadorController.list(req as AuthenticatedRequest, res));
 
@@ -63,7 +69,7 @@ routes.get('/ciap/', instituicaoController.listCIAP);
 
 routes.get('/ciap/:id', (req: Request, res: Response) =>
   instituicaoController.detail(req as AuthenticatedRequest, res));
-  
+
 routes.post('/ciap/', (req: Request, res: Response) =>
   instituicaoController.save(req as AuthenticatedRequest, res));
 
@@ -90,7 +96,8 @@ routes.get('/visita/', (req: Request, res: Response) =>
 routes.get('/visita/:id', (req: Request, res: Response) =>
   visitaController.detail(req as AuthenticatedRequest, res));
 
-routes.post('/visita/', visitaController.save);
+routes.post('/visita/', (req: Request, res: Response) =>
+  visitaController.save(req as AuthenticatedRequest, res));
 
 routes.get('/menu/', (req: Request, res: Response) =>
   MenuService.getMenu(req as AuthenticatedRequest, res));

@@ -23,7 +23,7 @@ export class Visita extends Model {
 
 Visita.init(
     {
-        status: { type: Sequelize.BOOLEAN, allowNull: false },
+        status: { type: Sequelize.INTEGER, allowNull: false },
         observacao: { type: Sequelize.STRING, allowNull: true },
         motivoReprovacao: { type: Sequelize.STRING, allowNull: true },
         prazoAceite: { type: Sequelize.DATE, allowNull: false },
@@ -45,16 +45,5 @@ Visita.hasMany(AgendamentoPrestacao, {
     as: 'agendamentos'
 });
 
-
-// Visita.belongsTo(Instituicao, {
-//     foreignKey: 'instituicaoId',
-//     as: 'instituicao'
-// });
-
-
-// Visita.belongsTo(Prestador, {
-//     foreignKey: 'prestadorId',
-//     as: 'prestador'
-// });
 
 export default Visita;

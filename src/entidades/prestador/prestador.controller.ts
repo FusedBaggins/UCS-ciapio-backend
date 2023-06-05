@@ -5,8 +5,6 @@ import Pergunta from "./entidades/pergunta/pergunta.model";
 import Droga from "./entidades/droga/droga.model";
 import { Op, Sequelize } from "sequelize";
 import { AuthenticatedRequest } from "../../..";
-import Instituicao from "../instituicao/instituicao.model";
-import Usuario from "../usuario/usuario.model";
 
 const _getListFilters = (req: Request) =>
 ({
@@ -25,6 +23,21 @@ export default {
             }
         });
         return res.status(200).json(entidades);
+    },
+
+    async listSelect(req: AuthenticatedRequest, res: Response): Promise<any> {
+
+        let entidades: Prestador[] = await Prestador.findAll({
+            where: {
+                instituicaoId: req?.user?.user.instituicaoId,
+            },
+            attributes: ['id', 'nome'],
+        });
+
+        return res.status(200).json(entidades.map(entidade => ({
+            id: entidade.id,
+            label: entidade.nome
+          })));
     },
 
     async detail(req: AuthenticatedRequest, res: Response): Promise<any> {

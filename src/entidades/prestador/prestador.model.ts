@@ -35,6 +35,7 @@ export class Prestador extends Model {
     endereco!: Endereco;
     usuario!: Usuario;
     instituicao!: Instituicao;
+    instituicaoId!: number;
 }
 
 Prestador.init(
@@ -68,6 +69,7 @@ Prestador.init(
         telefone1: { type: Sequelize.STRING, allowNull: false },
         telefone2: { type: Sequelize.STRING, allowNull: true },
         religiao: { type: Sequelize.STRING, allowNull: false },
+        instituicaoId: { type: Sequelize.INTEGER, allowNull: false },
         image: {
             type: DataTypes.BLOB('long'),
             allowNull: true,
@@ -88,7 +90,7 @@ Prestador.hasMany(Processo, {
 
 Prestador.hasOne(FichaMedica, {
     foreignKey: 'prestadorId',
-    as: 'prestador'
+    as: 'fichaMedica'
 });
 
 Prestador.belongsTo(Endereco, { 
