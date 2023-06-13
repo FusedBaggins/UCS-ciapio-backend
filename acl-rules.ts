@@ -73,6 +73,13 @@ const aclRules = [
         visible: true,
       },
       {
+        resource: "/alternativa-penal/*",
+        methods: ["POST", "GET", "PUT"],
+        action: "allow",
+        name: "Pena alternativa",
+        visible: true,
+      },
+      {
         resource: "/select/prestador",
         methods: ["GET"],
         action: "allow",
@@ -85,7 +92,7 @@ const aclRules = [
         action: "allow",
         name: "Select de instituição parceira",
         visible: false,
-      },
+      },      
     ]
   },
   {
