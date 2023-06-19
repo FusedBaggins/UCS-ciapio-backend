@@ -118,7 +118,13 @@ routes.post('/unauthorized/', (req: Request, res: Response) => {
 routes.post(
   "/login",
   passport.authenticate("local"),
-  (req: Request, res: Response) => res.status(200).send()
+  (req: Request, res: Response) => {
+    const reqAuthenticated = req as AuthenticatedRequest;
+    const objectReturn = {
+      role: reqAuthenticated.user?.role, 
+    }
+    return res.status(200).send(objectReturn);
+  }
 
 );
 
