@@ -70,8 +70,6 @@ class Application {
         this.express.use(passport.initialize());
         this.express.use(passport.session());
         authenticate.initAuthenticateMethods(); 
-
-       
     }
 
     private _setAclExpress(): void {

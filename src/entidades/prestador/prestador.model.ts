@@ -151,4 +151,9 @@ Visita.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });
+
+AlternativaPenal.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
+    as: 'prestador'
+});
 export default Prestador;
