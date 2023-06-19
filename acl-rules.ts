@@ -73,17 +73,10 @@ const aclRules = [
         visible: true,
       },
       {
-        resource: "/select/prestador",
+        resource: "/select/*",
         methods: ["GET"],
         action: "allow",
-        name: "Select de prestador",
-        visible: false,
-      },
-      {
-        resource: "/select/instituicao-parceira",
-        methods: ["GET"],
-        action: "allow",
-        name: "Select de instituição parceira",
+        name: "Selects",
         visible: false,
       },
     ]
