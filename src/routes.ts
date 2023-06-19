@@ -1,7 +1,6 @@
 import { Router, response } from "express";
 
 import varaController from "./entidades/vara/vara.controller";
-import cidadeControler from "./entidades/cidade/cidade.controller";
 import usuarioController from "./entidades/usuario/usuario.controller";
 import enderecoController from "./entidades/endereco/endereco.controller";
 import processoController from "./entidades/processo/processo.controller";
@@ -15,6 +14,7 @@ import { Response, Request } from "express";
 import { AuthenticatedRequest } from "..";
 import prestadorController from "./entidades/prestador/prestador.controller";
 import visitaController from "./entidades/visita/visita.controller";
+import cidadeController from "./entidades/cidade/cidade.controller";
 
 const routes = Router();
 
@@ -22,9 +22,9 @@ routes.get('/unidade-federativa/', unidadeFederativaController.list);
 
 routes.get('/unidade-federativa/:id', unidadeFederativaController.detail);
 
-routes.get('/cidade/', cidadeControler.list);
+routes.get('/cidade/', cidadeController.list);
 
-routes.get('/cidade/:id', cidadeControler.detail);
+routes.get('/cidade/:id', cidadeController.detail);
 
 routes.get('/endereco/', enderecoController.list);
 
@@ -55,6 +55,9 @@ routes.get('/select/prestador/', (req: Request, res: Response) =>
 
 routes.get('/select/instituicao-parceira/', (req: Request, res: Response) =>
   instituicaoController.listSelect(req as AuthenticatedRequest, res));
+
+routes.get('/select/cidade/', (req: Request, res: Response) =>
+  cidadeController.listSelect(req as AuthenticatedRequest, res));
 
 routes.get('/prestador/', (req: Request, res: Response) =>
   prestadorController.list(req as AuthenticatedRequest, res));
