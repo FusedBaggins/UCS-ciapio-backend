@@ -8,7 +8,7 @@ import AgendamentoPrestacao from '../agendamento-prestacao/agendamento-prestacao
 
 export class Visita extends Model {
     id!: number;
-    status!: boolean;
+    status!: number;
     observacao?: string;    
     motivoReprovacao?: string;
     prazoAceite!: Date;

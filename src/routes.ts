@@ -8,6 +8,7 @@ import instituicaoController from "./entidades/instituicao/instituicao.controlle
 import perguntaController from "./entidades/prestador/entidades/pergunta/pergunta.controller";
 import respostaController from "./entidades/prestador/entidades/resposta/resposta.controller";
 import unidadeFederativaController from './entidades/unidade-federativa/unidade-federativa.controller';
+import alternativaPenalController from './entidades/prestador/entidades/alternativa-penal/alternativa-penal.controller';
 import MenuService from "./services/menuService";
 import passport from "passport";
 import { Response, Request } from "express";
@@ -120,5 +121,8 @@ routes.post(
   (req: Request, res: Response) => res.status(200).send()
 
 );
+
+routes.get('/alternativa-penal/', (req: Request, res: Response) =>
+alternativaPenalController.list(req as AuthenticatedRequest, res));
 
 export default routes;
