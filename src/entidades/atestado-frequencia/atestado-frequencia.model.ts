@@ -15,14 +15,14 @@ export class AtestadoFrequencia extends Model {
 
 AtestadoFrequencia.init(
     {
-        titulo: { type: Sequelize.STRING, allowNull: false },
-        descricao: { type: Sequelize.STRING, allowNull: true },
-        duracao: { type: Sequelize.STRING, allowNull: false }
+        dt_entrada: { type: Sequelize.DATE, allowNull: false },
+        dt_saida: { type: Sequelize.DATE, allowNull: true },
+        observacoes: { type: Sequelize.STRING, allowNull: false }
     },
     {
         sequelize: database.connection,
         freezeTableName: true,
-        tableName: 'atestado_comparecimento'
+        tableName: 'atestado_frequencia'
     }
 );
 
