@@ -80,6 +80,13 @@ const aclRules = [
         visible: true,
       },
       {
+        resource: "/vara-penal/*",
+        methods: ["POST", "GET", "PUT"],
+        action: "allow",
+        name: "Vara penal",
+        visible: true,
+      },
+      {
         resource: "/select/*",
         methods: ["GET"],
         action: "allow",
