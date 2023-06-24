@@ -22,6 +22,8 @@ import AgendamentoPrestacao from "../../entidades/agendamento-prestacao/agendame
 import PerfilPermissaoUsuario from "../../entidades/perfil-permissao-usuario/perfil-permissao-usuario.model";
 import AlternativaPenal from "../../entidades/prestador/entidades/alternativa-penal/alternativa-penal.model";
 import InstituicaoVinculo from "../../entidades/instituicao/Instituicao-vinculo.model";
+import AtestadoFrequencia from "../../entidades/atestado-frequencia/atestado-frequencia.model";
+import AtestadoComparecimento from "../../entidades/atestado-comparecimento/atestado-comparecimento.model";
 
 export const entidades: any[] = [
     UnidadeFederativa,
@@ -48,4 +50,6 @@ export const entidades: any[] = [
     Familiar,
     PerfilPermissaoUsuario,
     AgendamentoPrestacao,
+    AtestadoFrequencia,
+    AtestadoComparecimento
 ];

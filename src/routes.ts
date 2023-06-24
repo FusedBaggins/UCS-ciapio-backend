@@ -118,13 +118,19 @@ routes.post('/unauthorized/', (req: Request, res: Response) => {
   res.status(401).json({ mensagem });
 });
 
-routes.get('/atestado-frequencia/', (req: Request, res: Response) =>
+routes.get('/frequencia/', (req: Request, res: Response) =>
   atestadoFrequenciaController.list(req as AuthenticatedRequest, res));
 
-routes.get('/atestado-frequencia/:id', atestadoFrequenciaController.detail);
+routes.get('/frequencia/:id', atestadoFrequenciaController.detail);
 
-routes.post('/atestado-frequencia/', (req: Request, res: Response) =>
+routes.post('/frequencia/', (req: Request, res: Response) =>
 atestadoFrequenciaController.create(req as AuthenticatedRequest, res));
+
+routes.get('/frequencia/agrupado/processo/', (req: Request, res: Response) =>
+atestadoFrequenciaController.listaAgrupadaPorProcesso(req as AuthenticatedRequest, res));
+
+routes.get('/frequencia/agrupado/processo/:id', (req: Request, res: Response) =>
+atestadoFrequenciaController.listaPorProcesso(req as AuthenticatedRequest, res));
 
 routes.post(
   "/login",

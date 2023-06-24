@@ -26,7 +26,7 @@ export class Processo extends Model {
     valor_a_pagar!: number;
     prestador!: Prestador;
     instituicao!: Instituicao;
-    vara!: Vara
+    vara!: Vara;
 }
 
 Processo.init(
@@ -62,9 +62,9 @@ Processo.hasMany(AtestadoComparecimento, {
     foreignKey: 'processoId',
 });
 
-AtestadoFrequencia.belongsTo(Processo, {
+Processo.hasMany(AtestadoFrequencia, {
     foreignKey: 'processoId',
-    as: 'processo'
+    as: 'atestadosFrequencia'
 });
 
 export default Processo;
