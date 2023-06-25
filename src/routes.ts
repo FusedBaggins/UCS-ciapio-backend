@@ -56,6 +56,9 @@ routes.get('/processo/', processoController.list);
 
 routes.get('/processo/:id', processoController.detail);
 
+routes.post('/processo/', (req: Request, res: Response) =>
+  processoController.save(req as AuthenticatedRequest, res));
+
 routes.get('/select/prestador/', (req: Request, res: Response) =>
   prestadorController.listSelect(req as AuthenticatedRequest, res));
 
