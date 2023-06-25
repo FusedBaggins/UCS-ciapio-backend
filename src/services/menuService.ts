@@ -8,12 +8,14 @@ class MenuService {
     static convertRulesToPermissoesUsuario(perfil: string) {
 
         if (perfil === Perfil[Perfil.Administrador]) {
-            return aclRules.map((x) => {
-                x.permissions
-                .map(x => mapperAclPermissao.convertAclPermissao(x))
-                .filter(x => x.action === "allow" && x.visivel == true)
+            const allPermissions = aclRules.flatMap((rule: any) => {
+                return rule.permissions.map((x: any) => 
+                    mapperAclPermissao.convertAclPermissao(x)
+                );
             });
+            return allPermissions;
         }
+
         else {
             return aclRules.find(x => {
                 return x.group == perfil
