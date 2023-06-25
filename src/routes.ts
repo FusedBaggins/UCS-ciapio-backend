@@ -16,6 +16,7 @@ import { AuthenticatedRequest } from "..";
 import prestadorController from "./entidades/prestador/prestador.controller";
 import visitaController from "./entidades/visita/visita.controller";
 import cidadeController from "./entidades/cidade/cidade.controller";
+import atestadoFrequenciaController from "./entidades/atestado-frequencia/atestado-frequencia.controller";
 
 const routes = Router();
 
@@ -119,6 +120,20 @@ routes.post('/unauthorized/', (req: Request, res: Response) => {
   res.status(401).json({ mensagem });
 });
 
+routes.get('/frequencia/', (req: Request, res: Response) =>
+  atestadoFrequenciaController.list(req as AuthenticatedRequest, res));
+
+routes.get('/frequencia/:id', atestadoFrequenciaController.detail);
+
+routes.post('/frequencia/', (req: Request, res: Response) =>
+atestadoFrequenciaController.create(req as AuthenticatedRequest, res));
+
+routes.get('/frequencia/agrupado/processo/', (req: Request, res: Response) =>
+atestadoFrequenciaController.listaAgrupadaPorProcesso(req as AuthenticatedRequest, res));
+
+routes.get('/frequencia/agrupado/processo/:id', (req: Request, res: Response) =>
+atestadoFrequenciaController.listaPorProcesso(req as AuthenticatedRequest, res));
+
 routes.post(
   "/login",
   passport.authenticate("local"),
@@ -134,5 +149,8 @@ routes.post(
 
 routes.get('/alternativa-penal/', (req: Request, res: Response) =>
   alternativaPenalController.list(req as AuthenticatedRequest, res));
+
+routes.get('/alternativa-penal/:id', (req: Request, res: Response) =>
+alternativaPenalController.detail(req as AuthenticatedRequest, res));
 
 export default routes;

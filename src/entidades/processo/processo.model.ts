@@ -8,6 +8,7 @@ import Instituicao from "../instituicao/instituicao.model";
 import AgendamentoPrestacao from '../agendamento-prestacao/agendamento-prestacao.model';
 import Visita from '../visita/visita.model';
 import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
+import { AtestadoFrequencia } from '../atestado-frequencia/atestado-frequencia.model';
 
 export class Processo extends Model {
     id!: number;
@@ -25,7 +26,7 @@ export class Processo extends Model {
     valor_a_pagar!: number;
     prestador!: Prestador;
     instituicao!: Instituicao;
-    vara!: Vara
+    vara!: Vara;
 }
 
 Processo.init(
@@ -59,6 +60,11 @@ Processo.hasMany(Visita, {
 
 Processo.hasMany(AtestadoComparecimento, {
     foreignKey: 'processoId',
+});
+
+Processo.hasMany(AtestadoFrequencia, {
+    foreignKey: 'processoId',
+    as: 'atestadosFrequencia'
 });
 
 export default Processo;

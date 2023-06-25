@@ -99,7 +99,14 @@ const aclRules = [
         action: "allow",
         name: "Selects",
         visible: false,
-      },      
+      },
+      {
+        resource: "/frequencia/*",
+        methods: ["POST", "GET", "PUT"],
+        action: "allow",
+        name: "Frequência",
+        visible: true,
+      }, 
     ]
   },
   {

@@ -156,4 +156,10 @@ AlternativaPenal.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });
+
+Processo.belongsTo(Prestador, {
+    foreignKey: 'prestadorId',
+    as: 'prestador'
+});
+
 export default Prestador;
