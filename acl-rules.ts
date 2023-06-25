@@ -141,7 +141,7 @@ const aclRules = [
     ],
   },
   {
-    group: "administrador",
+    group: "Administrador",
     permissions: [
       {
         resource: "*",
