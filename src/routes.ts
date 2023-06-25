@@ -33,10 +33,12 @@ routes.get('/endereco/', enderecoController.list);
 routes.get('/endereco/:id', enderecoController.detail);
 
 routes.get('/vara-penal/', varaController.list);
-routes.post('/vara-penal/', (req: Request, res: Response) =>
-  varaController.save(req as AuthenticatedRequest, res));
+
+routes.post('/vara-penal/', (req: Request, res: Response) => varaController.save(req as AuthenticatedRequest, res));
 
 routes.get('/vara-penal/:id', varaController.detail);
+
+routes.get('/select/vara-penal/', (req: Request, res: Response) => varaController.listSelect(req as AuthenticatedRequest, res));
 
 routes.get('/pergunta/', perguntaController.list);
 
