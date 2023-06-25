@@ -87,6 +87,13 @@ const aclRules = [
         visible: true,
       },
       {
+        resource: "/processo/*",
+        methods: ["POST", "GET", "PUT"],
+        action: "allow",
+        name: "Processo",
+        visible: true,
+      },
+      {
         resource: "/select/*",
         methods: ["GET"],
         action: "allow",

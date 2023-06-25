@@ -27,6 +27,23 @@ export default {
             return res.status(400).json(error);
         }
     },
+    async listSelect(req: AuthenticatedRequest, res: Response): Promise<any> {
+        const tipo_instituicao: any = req.query?.tipo_instituicao;
+
+        let entidade = await Vara.findAll();
+
+        if (entidade) {
+            const instituicoes = entidade.map((entidade) => ({
+                id: entidade.id,
+                label: entidade.nome,
+            }));
+
+            return res.status(200).json(
+                instituicoes
+            );
+        }
+        return res.status(404).json({});
+    },
     // edit(req: Request, res: Response): any {
     //     return res.status(200).json({});
     // },
