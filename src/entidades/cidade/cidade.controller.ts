@@ -19,13 +19,7 @@ export default {
     },
 
     async listSelect(req: AuthenticatedRequest, res: Response): Promise<any> {
-        const tipo_instituicao: any = req.query?.tipo_instituicao;
-
-        let entidade = await Cidade.findAll({
-            where: {
-                tipo_instituicao: tipo_instituicao || null
-            }
-        });
+        let entidade = await Cidade.findAll();
 
         if (entidade) {
             const instituicoes = entidade.map((entidade) => ({
