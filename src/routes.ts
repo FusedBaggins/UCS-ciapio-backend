@@ -153,7 +153,7 @@ routes.post(
 routes.get('/alternativa-penal/', (req: Request, res: Response) =>
   alternativaPenalController.list(req as AuthenticatedRequest, res));
 
-routes.get('/alternativa-penal/:id', (req: Request, res: Response) =>
-alternativaPenalController.detail(req as AuthenticatedRequest, res));
+routes.get('/alternativa-penal/getDescricaoAlternativaPenal', (req: Request, res: Response) =>
+  alternativaPenalController.getDescricaoAlternativaPenal(req as AuthenticatedRequest, res));
 
 export default routes;

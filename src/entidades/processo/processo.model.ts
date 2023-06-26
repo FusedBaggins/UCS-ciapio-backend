@@ -27,6 +27,7 @@ export class Processo extends Model {
     prestador!: Prestador;
     instituicao!: Instituicao;
     vara!: Vara;
+    descricao_alternativa_penal!:string;
 }
 
 Processo.init(
@@ -42,6 +43,7 @@ Processo.init(
         horas_cumprir: { type: Sequelize.INTEGER, allowNull: false },
         possui_multa: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
         valor_a_pagar: { type: Sequelize.FLOAT, allowNull: true },
+        descricao_alternativa_penal: { type: Sequelize.STRING, allowNull: true },
     },
     {
         sequelize: database.connection,
