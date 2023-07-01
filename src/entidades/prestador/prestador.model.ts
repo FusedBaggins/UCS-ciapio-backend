@@ -16,6 +16,7 @@ import FichaMedica from './entidades/ficha-medica/ficha-medica.model';
 import Habilidade from './entidades/habilidade/habilidade.model';
 import Trabalho from './entidades/trabalho/trabalho.model';
 import Instituicao from '../instituicao/instituicao.model';
+import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
 
 
 export class Prestador extends Model {
@@ -161,5 +162,11 @@ Processo.belongsTo(Prestador, {
     foreignKey: 'prestadorId',
     as: 'prestador'
 });
+
+Prestador.hasMany(AtestadoComparecimento, {
+    foreignKey: 'prestadorId',
+    as: 'entrevista'
+});
+
 
 export default Prestador;

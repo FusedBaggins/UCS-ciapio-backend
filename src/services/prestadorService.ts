@@ -3,6 +3,7 @@ import Habilidade from "../entidades/prestador/entidades/habilidade/habilidade.m
 import Prestador from "../entidades/prestador/prestador.model";
 import FichaMedicaView from "../interfaces/View/FichaMedicaView";
 import alternativaPenalService from "./alternativaPenalService";
+import AtestadoComparecimentoService from "./atestadoComparecimento";
 import BaseService from "./baseService";
 import beneficioService from "./beneficioService";
 import cursoService from "./cursoService";
@@ -29,7 +30,10 @@ class PrestadorService extends BaseService<Prestador> {
       campos.enderecoId = endereco.id;
     }
 
-    const entidade = await super.save(campos) as Prestador;
+    const { entrevistaId, ...camposSemEntrevistaId } = campos;
+
+    // Salve os campos sem o campo entrevistaId
+    const entidade = await super.save(camposSemEntrevistaId) as Prestador;
 
     const habilidades = await super.childListSave(
       campos.habilidades,
@@ -104,6 +108,7 @@ class PrestadorService extends BaseService<Prestador> {
       fichaMedica: {}
     };
 
+    
     if (campos.fichaMedica) {
       ficha.fichaMedica = await fichaMedicaService.save(campos.fichaMedica);
 
@@ -128,6 +133,14 @@ class PrestadorService extends BaseService<Prestador> {
         }
       }
     } 
+
+    if(entrevistaId){
+      const entrevista = await AtestadoComparecimentoService.getById(campos.entrevistaId);
+      if(entrevista){
+        entrevista.prestadorId = entidade.id;
+        await AtestadoComparecimentoService.save(entrevista);
+      }
+    }
 
     return {
       entidade,

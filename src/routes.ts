@@ -17,6 +17,7 @@ import prestadorController from "./entidades/prestador/prestador.controller";
 import visitaController from "./entidades/visita/visita.controller";
 import cidadeController from "./entidades/cidade/cidade.controller";
 import atestadoFrequenciaController from "./entidades/atestado-frequencia/atestado-frequencia.controller";
+import atestadoComparecimentoController from "./entidades/atestado-comparecimento/atestado-comparecimento.controller";
 
 const routes = Router();
 
@@ -111,6 +112,15 @@ routes.get('/visita/:id', (req: Request, res: Response) =>
 routes.post('/visita/', (req: Request, res: Response) =>
   visitaController.save(req as AuthenticatedRequest, res));
 
+routes.get('/entrevistas/:id', (req: Request, res: Response) =>
+atestadoComparecimentoController.detail(req as AuthenticatedRequest, res));
+
+routes.get('/entrevistas/', (req: Request, res: Response) =>
+  atestadoComparecimentoController.list(req as AuthenticatedRequest, res));
+
+routes.post('/entrevistas/', (req: Request, res: Response) =>
+  atestadoComparecimentoController.save(req as AuthenticatedRequest, res));
+
 routes.get('/menu/', (req: Request, res: Response) =>
   MenuService.getMenu(req as AuthenticatedRequest, res));
 
@@ -129,13 +139,13 @@ routes.get('/frequencia/', (req: Request, res: Response) =>
 routes.get('/frequencia/:id', atestadoFrequenciaController.detail);
 
 routes.post('/frequencia/', (req: Request, res: Response) =>
-atestadoFrequenciaController.create(req as AuthenticatedRequest, res));
+  atestadoFrequenciaController.create(req as AuthenticatedRequest, res));
 
 routes.get('/frequencia/agrupado/processo/', (req: Request, res: Response) =>
-atestadoFrequenciaController.listaAgrupadaPorProcesso(req as AuthenticatedRequest, res));
+  atestadoFrequenciaController.listaAgrupadaPorProcesso(req as AuthenticatedRequest, res));
 
 routes.get('/frequencia/agrupado/processo/:id', (req: Request, res: Response) =>
-atestadoFrequenciaController.listaPorProcesso(req as AuthenticatedRequest, res));
+  atestadoFrequenciaController.listaPorProcesso(req as AuthenticatedRequest, res));
 
 routes.post(
   "/login",
@@ -143,7 +153,7 @@ routes.post(
   (req: Request, res: Response) => {
     const reqAuthenticated = req as AuthenticatedRequest;
     const objectReturn = {
-      role: reqAuthenticated.user?.role, 
+      role: reqAuthenticated.user?.role,
     }
     return res.status(200).send(objectReturn);
   }

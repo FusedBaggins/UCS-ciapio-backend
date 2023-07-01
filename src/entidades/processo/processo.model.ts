@@ -60,10 +60,6 @@ Processo.hasMany(Visita, {
     foreignKey: 'processoId',
 });
 
-Processo.hasMany(AtestadoComparecimento, {
-    foreignKey: 'processoId',
-});
-
 Processo.hasMany(AtestadoFrequencia, {
     foreignKey: 'processoId',
     as: 'atestadosFrequencia'
