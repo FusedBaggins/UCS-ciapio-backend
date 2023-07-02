@@ -5,6 +5,10 @@ import Pergunta from "./entidades/pergunta/pergunta.model";
 import Droga from "./entidades/droga/droga.model";
 import { Op, Sequelize } from "sequelize";
 import { AuthenticatedRequest } from "../../..";
+import Resposta from "./entidades/resposta/resposta.model";
+import FichaMedica from "./entidades/ficha-medica/ficha-medica.model";
+import Deficiencia from "./entidades/deficiencia/deficiencia.model";
+import UsoDroga from "./entidades/uso-droga/uso-droga.model";
 
 const _getListFilters = (req: Request) =>
 ({
@@ -37,7 +41,7 @@ export default {
         return res.status(200).json(entidades.map(entidade => ({
             id: entidade.id,
             label: entidade.nome
-          })));
+        })));
     },
 
     async detail(req: AuthenticatedRequest, res: Response): Promise<any> {
@@ -50,9 +54,33 @@ export default {
                 'alternativasPenais',
                 'trabalhos',
                 'visitas',
-                'fichaMedica',
+                {
+                    model: FichaMedica,
+                    as: 'fichaMedica',
+                    include: [
+                        {
+                            model: Deficiencia,
+                            as: 'deficiencias',
+                        },
+                        {
+                            model: UsoDroga,
+                            as: 'usoDrogas',
+                        },
+                    ],
+                },
                 'processos',
                 'endereco',
+                {
+                    model: Resposta,
+                    as: 'respostas',
+                    include: [
+                        {
+                            model: Pergunta,
+                            as: 'pergunta',
+                            attributes: ['pergunta'],
+                        },
+                    ],
+                },
             ],
         });
 
@@ -67,8 +95,9 @@ export default {
 
         let drogas = await Droga.findAll();
 
-        if (entidade)
+        if (entidade) {
             return res.status(200).json({ entidade, perguntas, drogas });
+        }
 
         return res.status(404).json({});
     },

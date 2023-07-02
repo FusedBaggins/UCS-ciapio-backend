@@ -38,6 +38,13 @@ const aclRules = [
         visible: true,
       },
       {
+        resource: "/droga/*",
+        methods: ["POST", "GET"],
+        action: "allow",
+        name: "Droga",
+        visible: false,
+      },
+      {
         resource: "/visita/*",
         methods: ["POST", "GET"],
         action: "allow",

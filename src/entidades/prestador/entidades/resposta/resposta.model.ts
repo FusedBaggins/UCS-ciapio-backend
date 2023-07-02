@@ -1,4 +1,3 @@
-
 import Sequelize, { Model } from 'sequelize';
 
 import Prestador from '../../prestador.model';
@@ -23,15 +22,14 @@ Resposta.init(
     }
 );
 
-Pergunta.belongsToMany(Prestador, {
-    through: Resposta,
+Resposta.belongsTo(Pergunta, {
     foreignKey: 'perguntaId',
-    as: 'perguntas'
+    as: 'pergunta'
 });
 
-Prestador.belongsToMany(Pergunta, {
-    through: Resposta,
-    foreignKey: 'prestadorId'
+Prestador.hasMany(Resposta, {
+    foreignKey: 'prestadorId',
+    as: 'respostas'
 });
 
 export default Resposta;

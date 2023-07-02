@@ -18,6 +18,7 @@ import visitaController from "./entidades/visita/visita.controller";
 import cidadeController from "./entidades/cidade/cidade.controller";
 import atestadoFrequenciaController from "./entidades/atestado-frequencia/atestado-frequencia.controller";
 import atestadoComparecimentoController from "./entidades/atestado-comparecimento/atestado-comparecimento.controller";
+import drogaController from "./entidades/prestador/entidades/droga/droga.controller";
 
 const routes = Router();
 
@@ -103,6 +104,12 @@ routes.get('/usuario/:id', usuarioController.detail);
 routes.post('/usuario/', (req: Request, res: Response) =>
   usuarioController.save(req as AuthenticatedRequest, res));
 
+routes.get('/droga/', (req: Request, res: Response) =>
+  drogaController.list(req as AuthenticatedRequest, res));
+
+routes.get('/select/droga', (req: Request, res: Response) =>
+  drogaController.listSelect(req as AuthenticatedRequest, res));
+
 routes.get('/visita/', (req: Request, res: Response) =>
   visitaController.list(req as AuthenticatedRequest, res));
 
@@ -113,7 +120,7 @@ routes.post('/visita/', (req: Request, res: Response) =>
   visitaController.save(req as AuthenticatedRequest, res));
 
 routes.get('/entrevistas/:id', (req: Request, res: Response) =>
-atestadoComparecimentoController.detail(req as AuthenticatedRequest, res));
+  atestadoComparecimentoController.detail(req as AuthenticatedRequest, res));
 
 routes.get('/entrevistas/', (req: Request, res: Response) =>
   atestadoComparecimentoController.list(req as AuthenticatedRequest, res));

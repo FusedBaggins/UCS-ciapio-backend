@@ -87,19 +87,16 @@ class PrestadorService extends BaseService<Prestador> {
 
     );
 
-    const processos = await super.childListSave(
-      campos.processos,
-      entidade.id,
-      "prestadorId",
-      (item: any) => processoService.save(item)
-    );
-
-
     const respostas = await super.childListSave(
-      campos.respostas,
+      campos.respostas.filter((x: any) => x.descricao),
       entidade.id,
       "prestadorId",
-      (item: any) => respostaService.save(item)
+      (item: any) => {
+        return respostaService.save(item, null, {
+          perguntaId: item.perguntaId,
+          prestadorId: item.prestadorId,
+        });
+      }
     );
 
     let ficha: FichaMedicaView = {
@@ -108,8 +105,9 @@ class PrestadorService extends BaseService<Prestador> {
       fichaMedica: {}
     };
 
-    
+
     if (campos.fichaMedica) {
+      campos.fichaMedica.prestadorId = entidade.id;
       ficha.fichaMedica = await fichaMedicaService.save(campos.fichaMedica);
 
       if (ficha.fichaMedica) {
@@ -123,7 +121,7 @@ class PrestadorService extends BaseService<Prestador> {
           );
         }
 
-        if(campos.fichaMedica.usoDrogas){
+        if (campos.fichaMedica.usoDrogas) {
           ficha.usoDrogas = await super.childListSave(
             campos.fichaMedica.usoDrogas,
             ficha.fichaMedica.id,
@@ -132,11 +130,11 @@ class PrestadorService extends BaseService<Prestador> {
           );
         }
       }
-    } 
+    }
 
-    if(entrevistaId){
+    if (entrevistaId) {
       const entrevista = await AtestadoComparecimentoService.getById(campos.entrevistaId);
-      if(entrevista){
+      if (entrevista) {
         entrevista.prestadorId = entidade.id;
         await AtestadoComparecimentoService.save(entrevista);
       }
@@ -150,7 +148,6 @@ class PrestadorService extends BaseService<Prestador> {
       trabalhos,
       cursos,
       visitas,
-      processos,
       alternativasPenais,
       beneficios,
       respostas,

@@ -17,6 +17,7 @@ import Habilidade from './entidades/habilidade/habilidade.model';
 import Trabalho from './entidades/trabalho/trabalho.model';
 import Instituicao from '../instituicao/instituicao.model';
 import AtestadoComparecimento from '../atestado-comparecimento/atestado-comparecimento.model';
+import Resposta from './entidades/resposta/resposta.model';
 
 
 export class Prestador extends Model {
@@ -34,6 +35,7 @@ export class Prestador extends Model {
     religiao?: string;
     image?: File;
     endereco!: Endereco;
+    respostas!: Resposta[];
     usuario!: Usuario;
     instituicao!: Instituicao;
     instituicaoId!: number;

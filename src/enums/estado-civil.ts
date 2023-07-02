@@ -1,7 +1,7 @@
 enum EstadoCivil {
   Solteiro,
   Casado,
-  Separado,
+  UniaoEstavel,
   Divorciado,
   Viuvo,
 }

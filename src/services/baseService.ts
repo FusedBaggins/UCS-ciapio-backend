@@ -12,9 +12,15 @@ class BaseService<T extends Model> {
     return await service.model.findByPk(id);
   }
 
-  static async save<T extends Model>(this: new () => BaseService<T>, campos: Record<string, any>, buildOptions?: any | null) {
+  static async save<T extends Model>(this: new () => BaseService<T>, campos: Record<string, any>, buildOptions?: any | null, chaveComposta?: any) {
     const service = new this();
-    let entidade = await service.model.findByPk(campos.id);
+    let entidade: any;
+    if (chaveComposta)
+      entidade = await service.model.findOne(chaveComposta);
+
+    else
+      entidade = await service.model.findByPk(campos.id);
+      
     if (entidade) {
       await entidade.update(campos);
     } else {
@@ -25,7 +31,7 @@ class BaseService<T extends Model> {
   }
 
   static async childListSave<T extends Model>(list: any | null, idParent: number, keyParent: string, callback: (item: T) => Promise<T>) {
-    const listInserts: T[] = [];    
+    const listInserts: T[] = [];
     if (Array.isArray(list)) {
       for (const item of list) {
         item[keyParent] = idParent;

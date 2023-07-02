@@ -32,4 +32,13 @@ Deficiencia.belongsTo(FichaMedica, {
     as: 'fichaMedica'
 });
 
+FichaMedica.hasMany(Deficiencia, {
+    foreignKey: 'fichaMedicaId',
+    as: 'deficiencias'
+});
+
+FichaMedica.hasMany(UsoDroga, {
+    foreignKey: 'fichaMedicaId',
+    as: 'usoDrogas'
+});
 export default FichaMedica;
