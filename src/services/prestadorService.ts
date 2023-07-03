@@ -87,17 +87,19 @@ class PrestadorService extends BaseService<Prestador> {
 
     );
 
-    const respostas = await super.childListSave(
-      campos.respostas.filter((x: any) => x.descricao),
-      entidade.id,
-      "prestadorId",
-      (item: any) => {
-        return respostaService.save(item, null, {
-          perguntaId: item.perguntaId,
-          prestadorId: item.prestadorId,
-        });
-      }
-    );
+    if (campos.respostas) {
+      await super.childListSave(
+        campos.respostas.filter((x: any) => x.descricao),
+        entidade.id,
+        "prestadorId",
+        (item: any) => {
+          return respostaService.save(item, null, {
+            perguntaId: item.perguntaId,
+            prestadorId: item.prestadorId,
+          });
+        }
+      );
+    }
 
     let ficha: FichaMedicaView = {
       deficiencias: [],
@@ -135,11 +137,12 @@ class PrestadorService extends BaseService<Prestador> {
     if (entrevistaId) {
       const entrevista = await AtestadoComparecimentoService.getById(campos.entrevistaId);
       if (entrevista) {
-        entrevista.prestadorId = entidade.id;
-        await AtestadoComparecimentoService.save(entrevista);
+        const entrevistaJSON = entrevista.get({ plain: true });
+        entrevistaJSON.prestadorId = entidade.id;
+        await AtestadoComparecimentoService.save(entrevistaJSON);
       }
     }
-
+    
     return {
       entidade,
       endereco,
@@ -150,7 +153,6 @@ class PrestadorService extends BaseService<Prestador> {
       visitas,
       alternativasPenais,
       beneficios,
-      respostas,
       fichaMedica: ficha,
     };
   }

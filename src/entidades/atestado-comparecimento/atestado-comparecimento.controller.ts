@@ -19,9 +19,10 @@ export default {
     },
     async save(req: AuthenticatedRequest, res: Response): Promise<any> {
         try {
-            req.body.usuarioAtendimento = req?.user?.user.id;
+            req.body.usuarioAtendimentoId = req?.user?.user.id;
             req.body.instituicaoId = req?.user?.user?.instituicaoId;
             const entidade = await AtestadoComparecimentoService.save(req.body);
+               
             return res.status(200).json({
                 id: entidade.id,
             });
