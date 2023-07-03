@@ -80,7 +80,7 @@ const aclRules = [
         visible: true,
       },
       {
-        resource: "/alternativa-penal/*",
+        resource: "/agendamento-prestacao/*",
         methods: ["POST", "GET", "PUT"],
         action: "allow",
         name: "Pena alternativa",

@@ -7,17 +7,19 @@ import Instituicao from '../instituicao/instituicao.model';
 
 export class AtestadoFrequencia extends Model {
     id!: number;
-    dt_entrada!: Date;
-    dt_saida!: Date;
+    data_inicial!: Date;
+    horario_inicio!: string;
+    horario_fim!: string;
     observacoes!: string;
-    processo!: Processo;
+    processoId!: number;
 }
 
 AtestadoFrequencia.init(
     {
-        dt_entrada: { type: Sequelize.DATE, allowNull: false },
-        dt_saida: { type: Sequelize.DATE, allowNull: true },
-        observacoes: { type: Sequelize.STRING, allowNull: false }
+        data_inicial: { type: Sequelize.DATE, allowNull: false },
+        horario_inicio: { type: Sequelize.STRING, allowNull: false },
+        horario_fim: { type: Sequelize.STRING, allowNull: false },
+        observacoes: { type: Sequelize.STRING, allowNull: true }
     },
     {
         sequelize: database.connection,

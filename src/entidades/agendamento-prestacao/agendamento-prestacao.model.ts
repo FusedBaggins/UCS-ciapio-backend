@@ -4,12 +4,13 @@ import Visita from '../visita/visita.model';
 import database from '../../database/database';
 import Usuario from '../usuario/usuario.model';
 import Processo from '../processo/processo.model';
+import AtestadoFrequencia from '../atestado-frequencia/atestado-frequencia.model';
 
 class AgendamentoPrestacao extends Model {
 
     id!: number;
-    horario_inicio!: Date;
-    horario_fim!: Date;
+    horario_inicio!: string;
+    horario_fim!: string;
     data_inicial!: Date;
     segunda!: number;
     terca!: number;
@@ -18,6 +19,7 @@ class AgendamentoPrestacao extends Model {
     sexta!: number;
     sabado!: number;
     domingo!: number;
+    processoId!: number;
     dtaAlteracao!: Date;
     processo!: Processo;
     visita!: Visita;
@@ -26,17 +28,17 @@ class AgendamentoPrestacao extends Model {
 
 AgendamentoPrestacao.init(
     {
-        horario_inicio: { type: Sequelize.DATE, allowNull: false },
-        horario_fim: { type: Sequelize.DATE, allowNull: false },
+        horario_inicio: { type: Sequelize.STRING, allowNull: false },
+        horario_fim: { type: Sequelize.STRING, allowNull: false },
         data_inicial: { type: Sequelize.DATE, allowNull: false },
-        segunda: { type: Sequelize.INTEGER, allowNull: false },
-        terca: { type: Sequelize.INTEGER, allowNull: false },
-        quarta: { type: Sequelize.INTEGER, allowNull: false },
-        quinta: { type: Sequelize.INTEGER, allowNull: false },
-        sexta: { type: Sequelize.INTEGER, allowNull: false },
-        sabado: { type: Sequelize.INTEGER, allowNull: false },
-        domingo: { type: Sequelize.INTEGER, allowNull: false },
-        dtaAlteracao: { type: Sequelize.DATE, allowNull: false }
+        segunda: { type: Sequelize.BOOLEAN, allowNull: true },
+        terca: { type: Sequelize.BOOLEAN, allowNull: true },
+        quarta: { type: Sequelize.BOOLEAN, allowNull: true },
+        quinta: { type: Sequelize.BOOLEAN, allowNull: true },
+        sexta: { type: Sequelize.BOOLEAN, allowNull: true },
+        sabado: { type: Sequelize.BOOLEAN, allowNull: true },
+        domingo: { type: Sequelize.BOOLEAN, allowNull: true },
+        dtaAlteracao: { type: Sequelize.DATE, allowNull: true }
     },
     {
         sequelize: database.connection,
@@ -44,5 +46,16 @@ AgendamentoPrestacao.init(
         tableName: 'agendamento_prestacao'
     }
 );
+
+AgendamentoPrestacao.hasMany(AtestadoFrequencia, {
+    foreignKey: 'agendamentoId',
+    as: 'frequencias',
+});
+
+AtestadoFrequencia.belongsTo(AgendamentoPrestacao, {
+    foreignKey: 'agendamentoId',
+    as: 'agendamentoPrestacao',
+});
+
 
 export default AgendamentoPrestacao;

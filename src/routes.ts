@@ -19,6 +19,7 @@ import cidadeController from "./entidades/cidade/cidade.controller";
 import atestadoFrequenciaController from "./entidades/atestado-frequencia/atestado-frequencia.controller";
 import atestadoComparecimentoController from "./entidades/atestado-comparecimento/atestado-comparecimento.controller";
 import drogaController from "./entidades/prestador/entidades/droga/droga.controller";
+import agendamentoPrestacaoController from "./entidades/agendamento-prestacao/agendamento-prestacao.controller";
 
 const routes = Router();
 
@@ -170,8 +171,14 @@ routes.post(
 
 );
 
-routes.get('/alternativa-penal/', (req: Request, res: Response) =>
-  alternativaPenalController.list(req as AuthenticatedRequest, res));
+routes.get('/agendamento-prestacao/', (req: Request, res: Response) =>
+  agendamentoPrestacaoController.list(req as AuthenticatedRequest, res));
+
+routes.get('/agendamento-prestacao/:id', (req: Request, res: Response) =>
+  agendamentoPrestacaoController.detail(req as AuthenticatedRequest, res)); 
+
+routes.post('/agendamento-prestacao/', (req: Request, res: Response) =>
+  agendamentoPrestacaoController.save(req as AuthenticatedRequest, res));
 
 routes.get('/alternativa-penal/getDescricaoAlternativaPenal', (req: Request, res: Response) =>
   alternativaPenalController.getDescricaoAlternativaPenal(req as AuthenticatedRequest, res));

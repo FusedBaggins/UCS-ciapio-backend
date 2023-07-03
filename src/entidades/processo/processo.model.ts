@@ -54,6 +54,12 @@ Processo.init(
 
 Processo.hasOne(AgendamentoPrestacao, {
     foreignKey: 'processoId',
+    as: 'processo',
+});
+
+AgendamentoPrestacao.belongsTo(Processo, {
+    foreignKey: 'processoId',
+    as: 'processo', 
 });
 
 Processo.hasMany(Visita, {
