@@ -60,5 +60,17 @@ export default {
             return res.status(400).json(error);
         }
     },
+
+    async getUserLogged(req: AuthenticatedRequest, res: Response): Promise<any> {
+        let user: any = req?.user?.user;
+        const atributosRemover: string[] = ['senha', 'hash'];
+        const role: any = req?.user?.role;
+        atributosRemover?.forEach((atributo: string) => {
+            delete user[atributo];
+        });
+
+        user = { user, role };
+        return res.status(200).json(user);
+    }
 }
 

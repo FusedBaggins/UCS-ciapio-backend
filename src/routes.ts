@@ -99,6 +99,9 @@ routes.post('/instituicao-parceira/', (req: Request, res: Response) =>
 routes.get('/usuario/', (req: Request, res: Response) =>
   usuarioController.list(req as AuthenticatedRequest, res));
 
+routes.get('/usuario-logado/', (req: Request, res: Response) =>
+  usuarioController.getUserLogged(req as AuthenticatedRequest, res));
+  
 routes.get('/usuario/:id', usuarioController.detail);
 
 routes.post('/usuario/', (req: Request, res: Response) =>

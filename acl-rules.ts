@@ -113,7 +113,14 @@ const aclRules = [
         action: "allow",
         name: "Frequência",
         visible: true,
-      }, 
+      },
+      {
+        resource: "/usuario-logado",
+        methods: ["GET"],
+        action: "allow",
+        name: "Usuário logado",
+        visible: false
+      }
     ]
   },
   {
