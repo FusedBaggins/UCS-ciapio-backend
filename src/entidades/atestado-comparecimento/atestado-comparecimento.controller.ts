@@ -3,33 +3,15 @@ import { AtestadoComparecimento } from "./atestado-comparecimento.model";
 import { AuthenticatedRequest } from "../../..";
 import AtestadoComparecimentoService from "../../services/atestadoComparecimento";
 import { Op } from "sequelize";
-
-const _getListFilters = (req: AuthenticatedRequest) => {
-    const filters:any = {};
-  
-    // if (req.query.dataInicial) {
-    //   filters.data = {
-    //     ...(filters.data || {}),
-    //     [Op.gte]: req.query.dataInicial,
-    //   };
-    // }
-  
-    // if (req.query.dataFinal) {
-    //   filters.data = {
-    //     ...(filters.data || {}),
-    //     [Op.lte]: req.query.dataFinal,
-    //   };
-    // }
-  
-    if (req.query.nome) {
-      filters.nome = {
-        [Op.iLike]: `%${req.query.nome}%`,
-      };
-    }
-  
-    return filters;
-  };
-  
+const _getListFilters = (req: Request) =>
+({
+    ...(req.query.nome && {
+        nome: { [Op.iLike]: `%${req.query.nome}%` }
+    }),
+    ...(req.query.data && {
+        data: { [Op.eq]: req.query.data }
+    }),
+});
 
 export default {
     async list(req: AuthenticatedRequest, res: Response): Promise<any> {
