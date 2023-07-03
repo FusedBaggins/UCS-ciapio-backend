@@ -4,6 +4,14 @@ import { AuthenticatedRequest } from "../../..";
 import VisitaService from "../../services/visitaService";
 import EntidadeValidate from "../../helpers/validations/entidadeValidate";
 import VisitaValidate from "../../helpers/validations/visitaValidate";
+import { Op } from "sequelize";
+
+const _getListFilters = (req: Request) =>
+({
+    ...(req.query.nome && {
+        '$prestador.nome$': { [Op.iLike]: `%${req.query.nome}%` }
+    }),
+});
 
 export default {
     async list(req: AuthenticatedRequest, res: Response): Promise<any> {
@@ -11,6 +19,7 @@ export default {
         let entidades: Visita[] = await Visita.findAll({
             where: {
                 '$prestador.instituicaoId$': req.user?.user.instituicaoId,
+                ..._getListFilters(req),
             },
             include: [
                 'prestador',

@@ -2,11 +2,24 @@ import { Request, Response } from "express";
 import Processo from "./processo.model";
 import { AuthenticatedRequest } from "../../..";
 import ProcessoService from "../../services/processoService";
+import { Op } from "sequelize";
+
+const _getListFilters = (req: Request) =>
+({
+    ...(req.query.nome && {
+        nome: { [Op.iLike]: `%${req.query.nome}%` }
+    }),
+});
 
 export default {
-    async list(req: Request, res: Response): Promise<any> {
+    async list(req: AuthenticatedRequest, res: Response): Promise<any> {
 
-        let entidades: Processo[] = await Processo.findAll();
+        let entidades: Processo[] = await Processo.findAll({
+            where: {
+                '$prestador.instituicaoId$': req.user?.user.instituicaoId,
+                ..._getListFilters(req),
+            },
+        });
         return res.status(200).json(entidades);
     },
 

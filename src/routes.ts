@@ -43,7 +43,8 @@ routes.get('/vara-penal/:id', varaController.detail);
 
 routes.get('/select/vara-penal/', (req: Request, res: Response) => varaController.listSelect(req as AuthenticatedRequest, res));
 
-routes.get('/pergunta/', perguntaController.list);
+routes.get('/pergunta/', (req: Request, res: Response) =>
+  perguntaController.list(req as AuthenticatedRequest, res));
 
 routes.get('/pergunta/:id', (req: Request, res: Response) =>
   perguntaController.detail(req as AuthenticatedRequest, res));
@@ -55,7 +56,8 @@ routes.get('/resposta/', respostaController.list);
 
 routes.get('/resposta/:id', respostaController.detail);
 
-routes.get('/processo/', processoController.list);
+routes.get('/processo/', (req: Request, res: Response) =>
+processoController.list(req as AuthenticatedRequest, res));
 
 routes.get('/processo/:id', processoController.detail);
 
@@ -102,7 +104,7 @@ routes.get('/usuario/', (req: Request, res: Response) =>
 
 routes.get('/usuario-logado/', (req: Request, res: Response) =>
   usuarioController.getUserLogged(req as AuthenticatedRequest, res));
-  
+
 routes.get('/usuario/:id', usuarioController.detail);
 
 routes.post('/usuario/', (req: Request, res: Response) =>
@@ -175,7 +177,7 @@ routes.get('/agendamento-prestacao/', (req: Request, res: Response) =>
   agendamentoPrestacaoController.list(req as AuthenticatedRequest, res));
 
 routes.get('/agendamento-prestacao/:id', (req: Request, res: Response) =>
-  agendamentoPrestacaoController.detail(req as AuthenticatedRequest, res)); 
+  agendamentoPrestacaoController.detail(req as AuthenticatedRequest, res));
 
 routes.post('/agendamento-prestacao/', (req: Request, res: Response) =>
   agendamentoPrestacaoController.save(req as AuthenticatedRequest, res));

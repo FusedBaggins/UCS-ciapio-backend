@@ -12,7 +12,6 @@ import UsoDroga from "./entidades/uso-droga/uso-droga.model";
 
 const _getListFilters = (req: Request) =>
 ({
-    ...(req.query.id && { id: req.query.id }),
     ...(req.query.nome && {
         nome: { [Op.iLike]: `%${req.query.nome}%` }
     }),

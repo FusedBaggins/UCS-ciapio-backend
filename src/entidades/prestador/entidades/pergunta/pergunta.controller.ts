@@ -3,11 +3,24 @@ import Pergunta from "./pergunta.model";
 import PerguntaService from "../../../../services/perguntaService";
 import { AuthenticatedRequest } from "../../../../..";
 import EntidadeValidate from "../../../../helpers/validations/entidadeValidate";
+import { Op } from "sequelize";
+
+const _getListFilters = (req: Request) =>
+({
+    ...(req.query.pergunta && {
+        pergunta: { [Op.iLike]: `%${req.query.pergunta}%` }
+    }),
+});
 
 export default {
-    async list(req: Request, res: Response): Promise<any> {
+    async list(req: AuthenticatedRequest, res: Response): Promise<any> {
 
-        let entidades: Pergunta[] = await Pergunta.findAll();
+        let entidades: Pergunta[] = await Pergunta.findAll({
+            where: {
+                ..._getListFilters(req),
+                instituicaoId: req?.user?.user.instituicaoId,
+            }
+        }); 
         return res.status(200).json(entidades);
     },
 
@@ -19,7 +32,7 @@ export default {
                 ]
             });
 
-            if (entidade){
+            if (entidade) {
                 await EntidadeValidate.validarEntidadeDetail(entidade, req);
                 delete entidade.instituicao;
                 return res.status(200).json(entidade);

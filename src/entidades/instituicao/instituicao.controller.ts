@@ -5,10 +5,22 @@ import InstituicaoService from "../../services/instituicaoService";
 import { AuthenticatedRequest } from "../../..";
 import InstituicaoVinculo from "./Instituicao-vinculo.model";
 import InstituicaoValidate from "../../helpers/validations/instituicaoParceiraValidate";
+import { Op } from "sequelize";
+
+const _getListFilters = (req: Request) =>
+({
+    ...(req.query.nome && {
+        nome: { [Op.iLike]: `%${req.query.nome}%` }
+    }),
+});
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
-        let entidades: Instituicao[] = await Instituicao.findAll();
+        let entidades: Instituicao[] = await Instituicao.findAll({
+            where: {
+                ..._getListFilters(req),
+            }
+        });
         return res.status(200).json(entidades);
     },
 

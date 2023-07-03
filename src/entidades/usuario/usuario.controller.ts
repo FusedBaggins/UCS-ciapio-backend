@@ -7,7 +7,6 @@ import { Op } from "sequelize";
 
 const _getListFilters = (req: Request) =>
 ({
-    ...(req.query.id && { id: req.query.id }),
     ...(req.query.nome && {
         [Op.or]: [
             {

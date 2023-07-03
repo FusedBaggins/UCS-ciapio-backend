@@ -2,15 +2,47 @@ import { Request, Response } from "express";
 import { AtestadoComparecimento } from "./atestado-comparecimento.model";
 import { AuthenticatedRequest } from "../../..";
 import AtestadoComparecimentoService from "../../services/atestadoComparecimento";
+import { Op } from "sequelize";
+
+const _getListFilters = (req: AuthenticatedRequest) => {
+    const filters:any = {};
+  
+    // if (req.query.dataInicial) {
+    //   filters.data = {
+    //     ...(filters.data || {}),
+    //     [Op.gte]: req.query.dataInicial,
+    //   };
+    // }
+  
+    // if (req.query.dataFinal) {
+    //   filters.data = {
+    //     ...(filters.data || {}),
+    //     [Op.lte]: req.query.dataFinal,
+    //   };
+    // }
+  
+    if (req.query.nome) {
+      filters.nome = {
+        [Op.iLike]: `%${req.query.nome}%`,
+      };
+    }
+  
+    return filters;
+  };
+  
 
 export default {
-    async list(req: Request, res: Response): Promise<any> {
+    async list(req: AuthenticatedRequest, res: Response): Promise<any> {
 
-        let entidades: AtestadoComparecimento[] = await AtestadoComparecimento.findAll();
+        let entidades: AtestadoComparecimento[] = await AtestadoComparecimento.findAll({
+            where: {
+                ..._getListFilters(req),
+            }
+        });
         return res.status(200).json(entidades);
     },
 
-    async detail(req: Request, res: Response): Promise<any> {
+    async detail(req: AuthenticatedRequest, res: Response): Promise<any> {
         let entidade: AtestadoComparecimento | null = await AtestadoComparecimento.findByPk(req.params.id);
         if (entidade)
             return res.status(200).json(entidade);
@@ -22,7 +54,7 @@ export default {
             req.body.usuarioAtendimentoId = req?.user?.user.id;
             req.body.instituicaoId = req?.user?.user?.instituicaoId;
             const entidade = await AtestadoComparecimentoService.save(req.body);
-               
+
             return res.status(200).json({
                 id: entidade.id,
             });
