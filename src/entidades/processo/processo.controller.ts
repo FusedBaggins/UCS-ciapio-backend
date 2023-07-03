@@ -17,8 +17,11 @@ export default {
         let entidades: Processo[] = await Processo.findAll({
             where: {
                 '$prestador.instituicaoId$': req.user?.user.instituicaoId,
-                ..._getListFilters(req),
+               ..._getListFilters(req),
             },
+            include: [
+                'prestador',
+            ]
         });
         return res.status(200).json(entidades);
     },
